@@ -1,7 +1,7 @@
 const Config = {
     ADMIN_BASE_URL: process.env.NODE_ENV === 'development'
         ? (process.env.REACT_APP_ADMIN_BASE_URL || 'http://localhost:5005/')
-        : 'http://localhost:5005/',
+        : 'https://api.yourstore.com/',
     //WEBSITE_BASE_URL: 'https://localhost:3000/',
     WEBSITE_BASE_URL: 'http://localhost:3000/',
     DYNAMIC_METHOD_SUB_URL: 'api/v1/dynamic/dataoperation/',

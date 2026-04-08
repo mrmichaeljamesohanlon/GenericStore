@@ -25,7 +25,7 @@ const Review = [
     img: "/images/testimonial/3.jpg",
     user: "David R.",
     review:
-      "We've shopped at Generic Store multiple times and have always been impressed. Professional, friendly and completely no-nonsense. They treat every customer with care and attention. We wouldn't go anywhere else.",
+      "We've shopped at Generic Store multiple times and have always been impressed. Professional, friendly and completely no-nonsense. They treat every customer with the same care and attention. We wouldn't go anywhere else.",
   },
 ];
 const CustomerTestimonial = () => {
