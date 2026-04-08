@@ -822,7 +822,7 @@ const Checkout = () => {
                                 <div className="modal-bg">
                                     <div className="offer-content">
                                         <div>
-                                            <img src={logoDataUri} className="img-fluid mb-3 card-details-logo" alt="Spark Developments" />
+                                            <img src={logoDataUri} className="img-fluid mb-3 card-details-logo" alt="Generic Store" />
                                             <h2>Card Details!</h2>
                                             <p>
                                                 Provide your card detail<br /> and confirm final order!

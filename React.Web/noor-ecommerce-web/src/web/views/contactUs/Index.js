@@ -191,8 +191,8 @@ const ContactUs = () => {
 
                 <ul className="contact-list">
                   <li><i className="fas fa-map-marker-alt"></i><span id="lbl_cont_location">Location:</span>  Unit 10, Meden Road, Boughton, Newark, Nottinghamshire, NG22 9ZD</li>
-                  <li><i className="fas fa-phone"></i><span id="lbl_cont_callus">Call Us:</span>  <a href="tel:07516783331">07516 783331</a></li>
-                  <li><i className="far fa-envelope"></i><span id="lbl_cont_email">Email Us:</span>  <a href="mailto:jamie@sparkdevelopments.co.uk">jamie@sparkdevelopments.co.uk</a></li>
+                  <li><i className="fas fa-phone"></i><span id="lbl_cont_callus">Call Us:</span>  <a href="tel:0000000000">Your Phone Number</a></li>
+                  <li><i className="far fa-envelope"></i><span id="lbl_cont_email">Email Us:</span>  <a href="mailto:contact@yourstore.com">contact@yourstore.com</a></li>
                 </ul>
 
                 <h3>Opening Hours:</h3>
@@ -209,7 +209,7 @@ const ContactUs = () => {
                 <h3>Follow Us:</h3>
                 <ul className="social">
                   <li>
-                    <Link to="https://www.facebook.com/SparkDevelopments/" target="_blank"><i className="fab fa-facebook-f"></i></Link>
+                    <Link to="https://www.facebook.com/" target="_blank"><i className="fab fa-facebook-f"></i></Link>
                   </li>
 
                 </ul>

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace DAL.DBContext
 {
-    public partial class NoorPortalConnDB  : Database
+    public partial class StorePortalConnDB  : Database
     {
-		public NoorPortalConnDB()
+		public StorePortalConnDB()
 			 : base("DBConnection")
 		{
 			CommonConstruct();
 		}
 
 
-		public NoorPortalConnDB(string ConnetionString, string providerName)
+		public StorePortalConnDB(string ConnetionString, string providerName)
 			: base(ConnetionString, providerName)
 		{
 
@@ -27,11 +27,11 @@ namespace DAL.DBContext
 
 		public interface IFactory
 		{
-			NoorPortalConnDB GetInstance();
+			StorePortalConnDB GetInstance();
 		}
 
 		public static IFactory? Factory { get; set; }
-		public static NoorPortalConnDB GetInstance()
+		public static StorePortalConnDB GetInstance()
 		{
 			if (_instance != null)
 				return _instance;
@@ -39,10 +39,10 @@ namespace DAL.DBContext
 			if (Factory != null)
 				return Factory.GetInstance();
 			else
-				return new NoorPortalConnDB();
+				return new StorePortalConnDB();
 		}
 
-		[ThreadStatic] static NoorPortalConnDB? _instance;
+		[ThreadStatic] static StorePortalConnDB? _instance;
 
 		public override void OnBeginTransaction()
 		{
@@ -59,7 +59,7 @@ namespace DAL.DBContext
 
 		public class Record<T> where T : new()
 		{
-			public static NoorPortalConnDB repo { get { return NoorPortalConnDB.GetInstance(); } }
+			public static StorePortalConnDB repo { get { return StorePortalConnDB.GetInstance(); } }
 			public bool IsNew() { return repo.IsNew(this); }
 			public object Insert() { return repo.Insert(this); }
 

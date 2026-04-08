@@ -22,15 +22,15 @@ namespace DAL.DBContext
         public string ConnetionString { get; }
         public string providerName { get; }
 
-        public NoorPortalConnDB GetDataContextHelper(bool enableAutoSelect = true)
+        public StorePortalConnDB GetDataContextHelper(bool enableAutoSelect = true)
         {
 
             return (GetNewDataContext(ConnetionString, providerName, enableAutoSelect));
         }
 
-        private static NoorPortalConnDB GetNewDataContext(string ConnetionString, string providerName, bool enableAutoSelect)
+        private static StorePortalConnDB GetNewDataContext(string ConnetionString, string providerName, bool enableAutoSelect)
         {
-            NoorPortalConnDB repository = new NoorPortalConnDB(ConnetionString, providerName);
+            StorePortalConnDB repository = new StorePortalConnDB(ConnetionString, providerName);
             repository.EnableAutoSelect = enableAutoSelect;
             //repository.ELHelperInstance = elHelperInstance;
 

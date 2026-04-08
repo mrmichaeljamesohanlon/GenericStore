@@ -750,7 +750,7 @@ const ProductDetail = () => {
                                                 <div className="product-icon">
                                                     <ul className="product-social">
                                                         <li>
-                                                            <Link to="https://www.facebook.com/SparkDevelopments/" target="_blank" rel="noopener noreferrer">
+                                                            <Link to="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
                                                                 <i className="fa fa-facebook"></i>
                                                             </Link>
                                                         </li>

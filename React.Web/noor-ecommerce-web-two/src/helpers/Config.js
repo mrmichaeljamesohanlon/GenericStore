@@ -1,12 +1,12 @@
 const Config = {
     ADMIN_BASE_URL: process.env.NODE_ENV === 'development'
         ? (process.env.REACT_APP_ADMIN_BASE_URL || 'http://localhost:5005/')
-        : 'https://api.dgidc.co.uk/',
+        : 'http://localhost:5005/',
     //WEBSITE_BASE_URL: 'https://localhost:3000/',
-    WEBSITE_BASE_URL: 'https://shop.dgidc.co.uk/:3000/',
+    WEBSITE_BASE_URL: 'http://localhost:3000/',
     DYNAMIC_METHOD_SUB_URL: 'api/v1/dynamic/dataoperation/',
     COMMON_CONTROLLER_SUB_URL: 'api/v1/common/',
-    SITE_TTILE: 'Spark Developments',
+    SITE_TTILE: 'Generic Store',
 
     END_POINT_NAMES: {
         GET_SIZE_LIST: 'get-size-list',
