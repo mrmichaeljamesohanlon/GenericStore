@@ -19,7 +19,7 @@ namespace Helpers.AuthorizationHelpers.JwtTokenHelper
         public string? DeviceToken { get; set; }
         public string? UserID { get; set; }
         public string? Token { get; set; }
-        NoorAppAPIResult bzResult = new NoorAppAPIResult();
+        AppAPIResult bzResult = new AppAPIResult();
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             bool isAuthrizationNeeded = false;

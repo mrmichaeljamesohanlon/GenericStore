@@ -10196,7 +10196,7 @@ Pagination CSS
   border-radius: 6px;
 }
 
-/* Spark Developments motorsport banner backgrounds */
+/* Generic Store banner backgrounds */
 .main-banner.item-bg-spark-1 {
   background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(../images/main-banner1.jpg);
 }
@@ -10539,7 +10539,7 @@ Pagination CSS
 
 /* ======================================================
    Home Banner Slider – full-width auto-rotating carousel
-   Images sourced from shop.sparkdevelopments.co.uk
+   Images sourced from your store domain
    ====================================================== */
 
 .spark-banner-slider {

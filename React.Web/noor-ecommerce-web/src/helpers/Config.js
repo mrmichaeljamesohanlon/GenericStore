@@ -3,7 +3,7 @@ const Config = {
     ADMIN_BASE_URL: 'https://localhost:7149/',
     DYNAMIC_METHOD_SUB_URL: 'api/v1/dynamic/dataoperation/',
     COMMON_CONTROLLER_SUB_URL: 'api/v1/common/',
-    SITE_TTILE: 'Spark Developments',
+    SITE_TTILE: 'Generic Store',
 
     END_POINT_NAMES: {
         GET_SIZE_LIST: 'get-size-list',

@@ -71,7 +71,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -205,7 +205,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -410,7 +410,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -994,7 +994,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -1047,7 +1047,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -1131,7 +1131,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -1302,7 +1302,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);
@@ -1408,7 +1408,7 @@ namespace AdminPanel.Areas.V1.Controllers
             //--Api result type declared in resultType variable
             string resultType = "json";
 
-            NoorAppAPIResult result = new NoorAppAPIResult();
+            AppAPIResult result = new AppAPIResult();
             APIActionResult apiActionResult;
 
             result.ActionType = (ActionTypeEnum)Enum.Parse(typeof(ActionTypeEnum), resultType, true);

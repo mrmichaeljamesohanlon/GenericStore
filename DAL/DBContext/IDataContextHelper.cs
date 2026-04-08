@@ -11,6 +11,6 @@ namespace DAL.DBContext
         public string ConnetionString { get; }
         public string providerName { get; }
 
-        public NoorPortalConnDB GetDataContextHelper(bool enableAutoSelect = true);
+        public StorePortalConnDB GetDataContextHelper(bool enableAutoSelect = true);
     }
 }

@@ -29,12 +29,12 @@ const About = () => {
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-12">
               <div className="about-content">
-                <h2>About Spark Developments</h2>
-                <p>Spark Developments is your premier destination for motorsport solutions. We pride ourselves on the Spark Standard – a promise to provide results-driven service at all times, whether in the workshop, on the rally stage, or on the race track.</p>
+                <h2>About Generic Store</h2>
+                <p>Welcome to Generic Store – your go-to destination for quality products at great prices. We are committed to providing an outstanding shopping experience with a wide selection of items to suit every need and budget.</p>
 
-                <p>We are competitors ourselves – we know what it takes to finish, and to win. When you work with Spark Developments, you join our team. Our approach is professional, friendly, and completely transparent with no hidden costs.</p>
+                <p>Our team is passionate about customer satisfaction. From browsing to checkout, we strive to make every step of your shopping journey smooth, transparent, and enjoyable.</p>
 
-                <p>From car hire packages to full workshop services, we treat every vehicle with the same care and attention as our own. Honest, upfront and flexible – that is the Spark Standard.</p>
+                <p>Whether you are looking for everyday essentials or unique finds, Generic Store has something for everyone. Honest, reliable, and customer-focused – that is our promise.</p>
 
                 <div className="signature mb-0">
                   <img src={signature} alt="image" />
@@ -56,13 +56,13 @@ const About = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-4 mb-3">
-              <img src="https://www.sparkdevelopments.co.uk/assets/images/Why1.jpg" alt="Spark Developments motorsport team" className="img-fluid" />
+              <img src="https://placehold.co/600x400/cccccc/666666?text=Store+Image+1" alt="Our store" className="img-fluid" />
             </div>
             <div className="col-md-4 mb-3">
-              <img src="https://www.sparkdevelopments.co.uk/assets/images/Why2.jpg" alt="Spark Developments rally car" className="img-fluid" />
+              <img src="https://placehold.co/600x400/cccccc/666666?text=Store+Image+2" alt="Our products" className="img-fluid" />
             </div>
             <div className="col-md-4 mb-3">
-              <img src="https://www.sparkdevelopments.co.uk/assets/images/Why3.jpg" alt="Spark Developments workshop" className="img-fluid" />
+              <img src="https://placehold.co/600x400/cccccc/666666?text=Store+Image+3" alt="Our team" className="img-fluid" />
             </div>
           </div>
         </div>

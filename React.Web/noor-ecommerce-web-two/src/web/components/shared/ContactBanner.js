@@ -17,7 +17,7 @@ const ContactBanner = () => {
                   <h3>if you have any question please call us</h3>
                 </div>
                 <div>
-                  <h2>07516 783331</h2>
+                  <h2>Your Phone Number</h2>
                 </div>
               </div>
             </Col>

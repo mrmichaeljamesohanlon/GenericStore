@@ -9,9 +9,9 @@ namespace Helpers.ApiHelpers
 {
     public class APIActionResult : IActionResult
     {
-        private readonly NoorAppAPIResult _result;
+        private readonly AppAPIResult _result;
 
-        public APIActionResult(NoorAppAPIResult result)
+        public APIActionResult(AppAPIResult result)
         {
             _result = result;
         }
@@ -54,7 +54,7 @@ namespace Helpers.ApiHelpers
         }
     }
 
-    public class NoorAppAPIResult
+    public class AppAPIResult
     {
         public Exception? Exception { get; set; }
         public object? Data { get; set; }

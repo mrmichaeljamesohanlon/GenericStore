@@ -18,7 +18,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [siteTitle, setSiteTitle] = useState(Config['SITE_TTILE']);
     const [LocalizationLabelsArray, setLocalizationLabelsArray] = useState([]);
-    const [Email, setEmail] = useState('sudeshKumar19@sparkdevelopments.co.uk');
+    const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('123456');
 
 

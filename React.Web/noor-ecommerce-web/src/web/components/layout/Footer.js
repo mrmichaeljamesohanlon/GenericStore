@@ -115,7 +115,7 @@ const Footer = () => {
                                     </Link>
                                 </div>
 
-                                <p>Spark Developments is your premier destination for motorsport solutions. We pride ourselves on the Spark Standard – providing results-driven service in the workshop, on the rally stage and on the race track.</p>
+                                <p>Welcome to Generic Store – your go-to destination for quality products at great prices. We are committed to providing an outstanding shopping experience for every customer.</p>
                             </div>
                         </div>
 
@@ -215,7 +215,7 @@ const Footer = () => {
                                                 :
                                                 "Location:"
                                             }
-                                        </span>  Spark Developments, United Kingdom
+                                        </span>  Generic Store
                                     </li>
                                     <li>
                                         <i className="fas fa-phone"></i>
@@ -225,7 +225,7 @@ const Footer = () => {
                                                 :
                                                 "Call Us:"
                                             }
-                                        </span> <Link to="tel:07516783331">07516 783331</Link>
+                                        </span> <Link to="tel:0000000000">Your Phone Number</Link>
                                     </li>
                                     <li>
                                         <i className="far fa-envelope"></i>
@@ -235,7 +235,7 @@ const Footer = () => {
                                                 :
                                                 "Email Us:"
                                             }
-                                        </span> <Link to="mailto:jamie@sparkdevelopments.co.uk">jamie@sparkdevelopments.co.uk</Link>
+                                        </span> <Link to="mailto:contact@yourstore.com">contact@yourstore.com</Link>
                                     </li>
 
                                 </ul>
@@ -248,7 +248,7 @@ const Footer = () => {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-lg-6 col-md-6">
-                                <p>Copyright &copy; {new Date().getFullYear()} <a href="mailto:SparcDevelopmentAdmin@dgidc.co.uk">SparcDevelopmentAdmin@dgidc.co.uk</a> Spark Developments. All Rights Reserved By <a href="https://www.dgidc.co.uk" target="_blank" rel="noopener noreferrer">DGi Data Comms</a></p>
+                                <p>Copyright &copy; {new Date().getFullYear()} Generic Store. All Rights Reserved.</p>
                             </div>
 
                             <div className="col-lg-6 col-md-6">

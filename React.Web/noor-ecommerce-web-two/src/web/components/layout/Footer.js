@@ -118,7 +118,7 @@ const Footer = ({ layoutLogo }) => {
                     </div>
                     <div className="footer-detail">
                       <p>
-                        Spark Developments is your premier destination for motorsport solutions. We pride ourselves on the Spark Standard – a promise to provide results-driven service at all times, whether in the workshop, on the rally stage, or on the race track. We treat your car like our own.
+                        Welcome to Generic Store – your go-to destination for quality products at great prices. We are committed to providing an outstanding shopping experience for every customer.
                       </p>
                       <ul className="paymant-bottom">
 
@@ -274,22 +274,20 @@ const Footer = ({ layoutLogo }) => {
                                     <li>
                                       <i className="fa fa-map-marker"></i>
                                       <span>
-                                        <strong>Spark Developments</strong><br />
-                                        Unit 10, Meden Road,<br />
-                                        Boughton,<br />
-                                        Newark,<br />
-                                        Nottinghamshire,<br />
-                                        England<br />
-                                        NG22 9ZD
+                                        <strong>Generic Store</strong><br />
+                                        Your Address Line 1,<br />
+                                        Your Address Line 2,<br />
+                                        Your City,<br />
+                                        Your Country
                                       </span>
                                     </li>
                                     <li>
                                       <i className="fa fa-phone"></i>
-                                      <span>call us: 07516 783331</span>
+                                      <span>call us: Your Phone Number</span>
                                     </li>
                                     <li>
                                       <i className="fa fa-envelope-o"></i>
-                                      <span>email us: jamie@sparkdevelopments.co.uk</span>
+                                      <span>email us: contact@yourstore.com</span>
                                     </li>
                                   </ul>
                                 </div>
@@ -356,7 +354,7 @@ const Footer = ({ layoutLogo }) => {
           <Row>
             <Col xs="12">
               <div className="sub-footer-contain">
-                <span>&copy; {new Date().getFullYear()} </span>Copyright Spark Developments Powered by <a href="https://www.dgidc.co.uk" target="_blank" rel="noopener noreferrer">DGi Data Comms</a> and <a href="https://agilemarketingagency.co.uk" target="_blank" rel="noopener noreferrer">Agile Marketing Agency</a>
+                <span>&copy; {new Date().getFullYear()} </span>Copyright Generic Store. All Rights Reserved.
               </div>
             </Col>
           </Row>

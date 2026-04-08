@@ -13,19 +13,19 @@ const Review = [
     img: "/images/testimonial/1.jpg",
     user: "James T.",
     review:
-      "Spark Developments did a fantastic job preparing our car for the rally season. Their attention to detail is second to none, and the team genuinely cares about getting the best result. Highly recommended to anyone serious about motorsport.",
+      "The team at Generic Store did a fantastic job. Their attention to detail is second to none, and they genuinely care about getting the best result. Highly recommended to anyone looking for quality products and service.",
   },
   {
     img: "/images/testimonial/2.jpg",
     user: "Sarah M.",
     review:
-      "Brilliant service from start to finish. The Spark Standard is real – they were transparent, kept us updated throughout, and delivered exactly what was promised. Our car came back performing better than ever.",
+      "Brilliant service from start to finish. They were transparent, kept us updated throughout, and delivered exactly what was promised. Will definitely be shopping here again.",
   },
   {
     img: "/images/testimonial/3.jpg",
     user: "David R.",
     review:
-      "We've used Spark Developments for both hire packages and workshop services. Professional, friendly and completely no-nonsense. They treat your car like their own. We wouldn't go anywhere else.",
+      "We've shopped at Generic Store multiple times and have always been impressed. Professional, friendly and completely no-nonsense. They treat every customer with the same care and attention. We wouldn't go anywhere else.",
   },
 ];
 const CustomerTestimonial = () => {
