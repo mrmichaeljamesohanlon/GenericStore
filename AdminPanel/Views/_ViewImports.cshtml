@@ -1,0 +1,21 @@
+﻿@using AdminPanel
+@using AdminPanel.Models
+@using Helpers.CommonHelpers
+@using Helpers.CommonHelpers.Enums
+@using Helpers.AuthorizationHelpers
+@using Entities.CommonModels
+@using Entities.MainModels
+@using Entities.DBModels
+@using Entities.DBInheritedModels
+@using Newtonsoft.Json
+@using Helpers.ConversionHelpers
+
+
+<!--Dependency Injections-->
+@inject IConstants ConstantsHelper
+@inject IHttpContextAccessor sessonContext
+@inject IConfiguration configuration
+@inject ISessionManager sessionManager
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

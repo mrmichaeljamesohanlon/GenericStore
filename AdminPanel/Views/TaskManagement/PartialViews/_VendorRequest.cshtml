@@ -1,0 +1,405 @@
+﻿@model Entities.MainModels.TasksManagementModel
+
+<!--request header area-->
+@await Html.PartialAsync("~/Views/TaskManagement/PartialViews/_RequestModalHeader.cshtml", Model)
+
+<!--request body area-->
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card border-left-3 border-left-slate">
+            <div class="card-header header-elements-inline">
+                <h6 class="card-title" id="lbl_vndor_sub_title">@(Model?.PageBasicInfoObj?.PageTitle ?? "Page Info")</h6>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        @* <a class="list-icons-item" data-action="collapse"></a>*@
+                        @*  <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-tabs-highlight mb-0">
+                    <li class="nav-item"><a href="#request-overview-info-tab" class="nav-link active" data-toggle="tab"><i class="icon-user mr-2"></i><span id="lbl_vndor_request_overview"> Overview</span></a></li>
+                    <li class="nav-item"><a href="#request-detail-info-tab" class="nav-link" data-toggle="tab"><i class="icon-address-book mr-2"></i> <span id="lbl_vndor_request_detail">Detail</span></a></li>
+
+
+                </ul>
+
+                <div class="tab-content card card-body border-top-0 rounded-top-0 mb-0">
+                    <div class="tab-pane fade show active" id="request-overview-info-tab">
+                        <fieldset class="mb-3">
+
+
+
+
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_fname"> First Name</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="FirstNameVendor" name="FirstNameVendor" value="@(Model?.vendorsAccountRequestObj?.FirstName)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_lname">Last Name</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="LastNameVendor" name="LastNameVendor" value="@(Model?.vendorsAccountRequestObj?.LastName)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_email">Email</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="EmailNameVendor" name="EmailNameVendor" value="@(Model?.vendorsAccountRequestObj?.EmailAddress)" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_hcountry"> Home Country</span>
+
+
+                                    </label>
+
+                                    <select class="form-control" id="HomeCountryVendor" name="HomeCountryVendor" disabled>
+                                        <option value="">Home Country</option>
+                                        @if (Model?.CountriesList != null && Model.CountriesList.Count() > 0)
+                                        {
+                                            foreach (var item in Model.CountriesList)
+                                            {
+                                                if (item.CountryId == Model?.vendorsAccountRequestObj?.HomeCountryId)
+                                                {
+                                                    <option value="@item.CountryId" selected>@item.CountryName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.CountryId">@item.CountryName</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                    <div class="tab-pane fade" id="request-detail-info-tab">
+                        <fieldset class="mb-3">
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_mname"> Middle Name</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="MiddleNameVendor" name="MiddleNameVendor" value="@(Model?.vendorsAccountRequestObj?.MiddleName)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_phone">Phone Number</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="PhoneVendor" name="PhoneVendor" value="@(Model?.vendorsAccountRequestObj?.MobileNo)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_mobile">Mobile Number</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="MobileVendor" name="MobileVendor" value="@(Model?.vendorsAccountRequestObj?.MobileNo)" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_dateofbirth"> Date of Birth</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="DobVendor" name="DobVendor" value="@(Model?.vendorsAccountRequestObj?.DateOfBirth)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_gender">Gender</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="GenderVendor" name="GenderVendor" value="@(Model?.vendorsAccountRequestObj?.Gender)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_termaccpt">Is Term Accepted?</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="TermAcceptedVendor" name="TermAcceptedVendor" value="@(Model?.vendorsAccountRequestObj?.IsTermAccepted!=null && Model?.vendorsAccountRequestObj?.IsTermAccepted==true ? "Yes" : "No")" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_policyaccpt"> Is Privacy Policy Accepted?</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="PrivacyVendor" name="PrivacyVendor" value="@(Model?.vendorsAccountRequestObj?.IsPrivacyPolicyAccepted!=null && Model?.vendorsAccountRequestObj?.IsPrivacyPolicyAccepted==true ? "Yes" : "No")" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_newsltraccpt">Is News Letter Accepted?</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="LetterAcceptedVendor" name="LetterAcceptedVendor" value="@(Model?.vendorsAccountRequestObj?.IsNewsLetterAccepted!=null && Model?.vendorsAccountRequestObj?.IsNewsLetterAccepted==true ? "Yes" : "No")" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addresone">Address One</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="AddressOneVendor" name="AddressOneVendor" value="@(Model?.vendorsAccountRequestObj?.AddressOne)" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addresone_county"> Address One Country</span>
+
+
+                                    </label>
+
+                                    <select class="form-control" id="AddressOneCountryVendor" name="AddressOneCountryVendor" disabled>
+                                        <option value="">Country</option>
+
+                                        @if (Model?.CountriesList != null && Model.CountriesList.Count() > 0)
+                                        {
+                                            foreach (var item in Model.CountriesList)
+                                            {
+                                                if (item.CountryId == Model?.vendorsAccountRequestObj?.AddressOneCountryId)
+                                                {
+                                                    <option value="@item.CountryId" selected>@item.CountryName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.CountryId">@item.CountryName</option>
+                                                }
+                                            }
+                                        }
+
+
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addressone_state">Address One State</span>
+
+
+                                    </label>
+
+                                    <select class="form-control" id="AddressOneStateVendor" name="AddressOneStateVendor" disabled>
+                                        <option value="">State</option>
+                                        @if (Model?.StatesList != null && Model.StatesList.Count() > 0)
+                                        {
+                                            foreach (var item in Model.StatesList)
+                                            {
+                                                if (item.StateProvinceId == Model?.vendorsAccountRequestObj?.AddressOneStateId)
+                                                {
+                                                    <option value="@item.StateProvinceId" selected>@item.StateName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.StateProvinceId">@item.StateName</option>
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_old_address_one_city">Address One City</span>
+
+
+                                    </label>
+
+                                    <select class="form-control" id="AddressOneCityVendor" name="AddressOneCityVendor" disabled>
+                                        <option value="">City</option>
+                                        @if (Model?.CititesList != null && Model.CititesList.Count() > 0)
+                                        {
+                                            foreach (var item in Model.CititesList)
+                                            {
+                                                if (item.CityId == Model?.vendorsAccountRequestObj?.AddressOneCityId)
+                                                {
+                                                    <option value="@item.CityId" selected>@item.CityName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.CityId">@item.CityName</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addressone_type"> Address One Type</span>
+
+
+                                    </label>
+
+                                    <select class="form-control" id="AddressOneTypeVendor" name="AddressOneTypeVendor" disabled>
+                                        <option value="">Address Type</option>
+                                        @if (Model?.AddressTypeList != null && Model.AddressTypeList.Count() > 0)
+                                        {
+                                            foreach (var item in Model.AddressTypeList)
+                                            {
+                                                if (item.AddressTypeId == Model?.vendorsAccountRequestObj?.AddressOneTypeId)
+                                                {
+                                                    <option value="@item.AddressTypeId" selected>@item.AddressTypeName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.AddressTypeId">@item.AddressTypeName</option>
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addressone_postcod">Address One Postal Code</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="AddressOnePCodeVendor" name="AddressOnePCodeVendor" value="@(Model?.vendorsAccountRequestObj?.AddressOnePostalCode)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_vndor_addressone_createdon">Created On</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="CreatedOnVendor" name="CreatedOnVendor" value="@(Model?.vendorsAccountRequestObj?.CreatedOn)" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

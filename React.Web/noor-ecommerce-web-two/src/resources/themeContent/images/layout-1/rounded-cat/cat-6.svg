@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg6" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#0A1E0B"/>
+    </radialGradient>
+    <linearGradient id="wrench6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#388E3C"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg6)"/>
+  <!-- Wrench handle -->
+  <rect x="90" y="55" width="20" height="95" rx="10" fill="url(#wrench6)"/>
+  <!-- Wrench head top -->
+  <path d="M72,55 Q100,30 128,55 Q115,75 100,72 Q85,75 72,55Z" fill="url(#wrench6)"/>
+  <!-- Wrench head cutout top -->
+  <ellipse cx="100" cy="60" rx="14" ry="10" fill="url(#bg6)"/>
+  <!-- Wrench head bottom -->
+  <path d="M72,150 Q100,170 128,150 Q115,130 100,133 Q85,130 72,150Z" fill="url(#wrench6)"/>
+  <!-- Wrench head cutout bottom -->
+  <ellipse cx="100" cy="145" rx="14" ry="10" fill="url(#bg6)"/>
+  <!-- Decorative grip lines -->
+  <line x1="88" y1="90" x2="112" y2="90" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="88" y1="100" x2="112" y2="100" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="88" y1="110" x2="112" y2="110" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

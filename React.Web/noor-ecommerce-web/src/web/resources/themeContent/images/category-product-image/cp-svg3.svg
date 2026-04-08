@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </linearGradient>
+    <linearGradient id="pipe3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D0D0D0"/>
+      <stop offset="50%" stop-color="#9E9E9E"/>
+      <stop offset="100%" stop-color="#616161"/>
+    </linearGradient>
+    <linearGradient id="tip3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BDBDBD"/>
+      <stop offset="100%" stop-color="#424242"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="85%" cy="50%" r="30%">
+      <stop offset="0%" stop-color="#FF6B35" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="200" rx="12" fill="url(#bg3)"/>
+  <!-- Heat glow from exhaust tip -->
+  <ellipse cx="255" cy="100" rx="55" ry="45" fill="url(#glow3)"/>
+  <!-- Exhaust pipe body (silver/chrome) -->
+  <rect x="20" y="84" width="210" height="32" rx="16" fill="url(#pipe3)" stroke="#424242" stroke-width="1.5"/>
+  <!-- Pipe highlight (chrome shine) -->
+  <rect x="24" y="87" width="200" height="7" rx="4" fill="white" opacity="0.25"/>
+  <!-- Heat wrap bands (diagonal tape) -->
+  <line x1="48"  y1="84" x2="42"  y2="116" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <line x1="66"  y1="84" x2="60"  y2="116" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <line x1="84"  y1="84" x2="78"  y2="116" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <line x1="102" y1="84" x2="96"  y2="116" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <line x1="120" y1="84" x2="114" y2="116" stroke="#FF8C00" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <line x1="138" y1="84" x2="132" y2="116" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.95"/>
+  <!-- Exhaust tip -->
+  <ellipse cx="242" cy="100" rx="20" ry="26" fill="url(#tip3)" stroke="#212121" stroke-width="3"/>
+  <ellipse cx="242" cy="100" rx="12" ry="16" fill="#111111"/>
+  <!-- Heat shimmer / exhaust gases -->
+  <ellipse cx="268" cy="86" rx="9" ry="6" fill="#FF6B35" opacity="0.5"/>
+  <ellipse cx="278" cy="72" rx="7" ry="5" fill="#FF8C00" opacity="0.35"/>
+  <ellipse cx="272" cy="114" rx="8" ry="5" fill="#FF6B35" opacity="0.4"/>
+  <ellipse cx="282" cy="126" rx="6" ry="4" fill="#FF8C00" opacity="0.25"/>
+</svg>

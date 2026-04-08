@@ -1,0 +1,79 @@
+﻿@model Entities.MainModels.SalesModel
+
+<ul class="media-list">
+
+    @{
+        if (Model?.OrderNotesList != null)
+        {
+            foreach (var item in Model.OrderNotesList.Where(p => p.ParentOrderNoteId == null || p.ParentOrderNoteId == 0))
+            {
+                <li class="media">
+
+                    <div class="mr-3 position-relative">
+                        <a href="#" class="btn bg-indigo-400 rounded-round btn-icon btn-sm">
+                            @{
+                                string lettersCharFirstParent = !String.IsNullOrWhiteSpace(item.CreatedByFirstName) ? item.CreatedByFirstName.Substring(0, 1) : "";
+                                string lettersCharLastParent = !String.IsNullOrWhiteSpace(item.CreatedByLastName) ? item.CreatedByLastName.Substring(0, 1) : "";
+
+                            }
+                            <span class="letter-icon">@(lettersCharFirstParent  + lettersCharLastParent )</span>
+                        </a>
+                    </div>
+
+                    <div class="media-body">
+                        <div class="media-title">
+                            <a href="#">
+                                <span class="font-weight-semibold">@(item.CreatedByFirstName + " " + item.CreatedByLastName)</span>
+                                <span class="text-muted float-right font-size-sm">@(item.CreatedOn?.ToString("dd MMM, yyyy"))</span>
+                            </a>
+                        </div>
+
+
+                        <div class="media-title">
+                            <a href="#">
+                                <span class="text-muted">@item.Message</span>
+                                <span class="text-muted float-right font-size-sm" onclick="    showReplyModel('@item.OrderNoteId');"><i class="icon-compose"></i></span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </li>
+
+
+                @if (Model.OrderNotesList.Where(y => y.ParentOrderNoteId == item.OrderNoteId).Count() > 0)
+                {
+                    foreach (var child in Model.OrderNotesList.Where(y => y.ParentOrderNoteId == item.OrderNoteId).ToList())
+                    {
+                        <li class="media order-note-reply">
+                            <div class="mr-3 position-relative">
+                                <a href="#" class="btn bg-warning rounded-round btn-icon btn-sm">
+                                    @{
+                                        string lettersCharFirstChild = !String.IsNullOrWhiteSpace(child.CreatedByFirstName) ? child.CreatedByFirstName.Substring(0, 1) : "";
+                                        string lettersCharLastChild = !String.IsNullOrWhiteSpace(child.CreatedByLastName) ? child.CreatedByLastName.Substring(0, 1) : "";
+
+                                    }
+                                    <span class="letter-icon">@(lettersCharFirstChild  + lettersCharLastChild )</span>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-title">
+                                    <a href="#">
+                                        <span class="font-weight-semibold">@(child.CreatedByFirstName + " " + child.CreatedByLastName)</span>
+                                        <span class="text-muted float-right font-size-sm">@(child.CreatedOn?.ToString("dd MMM, yyyy"))</span>
+                                    </a>
+                                </div>
+
+                                <span class="text-muted">@child.Message</span>
+                            </div>
+                        </li>
+                    }
+                }
+
+
+
+            }
+        }
+    }
+
+</ul>

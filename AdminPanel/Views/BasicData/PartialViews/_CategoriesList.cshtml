@@ -1,0 +1,336 @@
+﻿@model Entities.MainModels.BasicDataModel
+
+@{
+    bool hasUpdateRecordRight = true;
+
+    if (Model != null && Model.PageBasicInfoObj != null && Model.PageBasicInfoObj.EntityId > 0)
+    {
+        List<RoleRightEntity>? UserRolesRights = sessionManager != null ? await sessionManager.GetUserRoleRightsFromSession() : new List<RoleRightEntity>();
+        hasUpdateRecordRight = UserRolesRights != null && UserRolesRights.Count > 0 && UserRolesRights.Any(x => x.EntityId == Model?.PageBasicInfoObj?.EntityId && x.RightId == (short)UserRightsEnum.Update) ? true : false;
+    }
+
+}
+
+@await Html.PartialAsync("~/Views/Common/_DataTableLength.cshtml")
+
+<table class="table site-table-listing">
+    <thead>
+        <tr>
+            <th id="lbl_hdr_categoryId"> Category ID</th>
+            <th id="lbl_hdr_catimg"> Picture</th>
+            <th id="lbl_hdr_catName"> Name</th>
+            <th id="lbl_hdr_parentCatName"> Parent Category</th>
+            <th id="lbl_hdr_catStatus"> Status</th>
+            <th id="lbl_hdr_catCreatedOn">  Created On</th>
+
+
+            <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null && Model.CategoryList != null && Model.CategoryList.Count > 0)
+            {
+                var parentCategories = Model.CategoryList.Where(c => c.ParentCategoryId == null).ToList();
+                var subCategoryMap = Model.CategoryList
+                    .Where(c => c.ParentCategoryId != null)
+                    .GroupBy(c => c.ParentCategoryId)
+                    .ToDictionary(g => g.Key, g => g.ToList());
+
+                foreach (var item in parentCategories)
+                {
+                    var hasSubCategories = subCategoryMap.ContainsKey(item.CategoryId);
+
+                    <tr>
+                        <td><span class="text-dark">@item.CategoryId</span></td>
+                        <td>
+
+                            @{
+                                string ImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + item.AttachmentURL);
+
+                                if (System.IO.File.Exists(ImagePath))
+                                {
+
+                                    <a href="@item.AttachmentURL" target="_blank">
+                                        <img src="@item.AttachmentURL" class="" width="100" height="100" alt="">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" target="_blank">
+                                        <img src="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" class="" width="100" height="100" alt="">
+                                    </a>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="text-default font-weight-semibold">@item.Name</a>
+                                    @if (hasSubCategories)
+                                    {
+                                        <button type="button"
+                                                class="btn btn-sm btn-light ml-2 toggle-subcategories"
+                                                data-parent-id="@item.CategoryId"
+                                                title="Show/hide subcategories"
+                                                style="padding:1px 7px; font-size:12px;">
+                                            <i class="icon-arrow-down12"></i> <span class="subcat-count">@subCategoryMap[item.CategoryId].Count</span>
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                       
+                          <td><span class="text-dark">@item.ParentCategoryName</span></td>
+
+                        @if (item.IsActive != null && item.IsActive == false)
+                        {
+                            <td><span class="badge bg-blue">Not Active</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge bg-success-400">Active</span></td>
+                        }
+
+
+                        <td><span class="text-dark">@(item.CreatedOn.ToString("dd MMM, yyyy"))</span></td>
+
+
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+
+                                        @if (hasUpdateRecordRight)
+                                        {
+                                            <a href="#!" class="dropdown-item text-indigo-600" onclick="showEditModal('@item.CategoryId','@item.Name','@item.ParentCategoryId','@item.IsActive' , '@item.AttachmentId');"><i class="icon-database-edit2"></i>Edit</a>
+                                        }
+
+                                        
+
+                                       
+                                        @{
+                                            ListingDeleteButton pageDeleteButton = new ListingDeleteButton
+                                            {
+                                                 EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0,
+                                                primaryKeyColumn = "CategoryID",
+                                                primarykeyValue = item.CategoryId.ToString(),
+                                                tableName = "Categories",
+                                                SqlDeleteType = (short)SqlDeleteTypes.PlainTableDelete,
+                                            };
+                                        }
+                                        @await Html.PartialAsync("~/Views/Common/_ListingDeleteButton.cshtml", pageDeleteButton)
+
+                                        <a href="@Url.Action("DynamicLocalizationDetail" , "Dynamic" , new {langCode = Model?.PageBasicInfoObj?.langCode, PageTitle = nameof(LocalizationTablesEnum.Categories) , LocalizationTableId = (int)LocalizationTablesEnum.Categories , PKeyId = item.CategoryId })" class="dropdown-item text-warning-600"><i class="icon-sphere me-3"></i>Other Langs</a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    @if (hasSubCategories)
+                    {
+                        foreach (var sub in subCategoryMap[item.CategoryId])
+                        {
+                            <tr class="subcat-row subcat-of-@item.CategoryId" style="display:none; background-color:#f9f9f9;">
+                                <td><span class="text-dark" style="padding-left:20px;">&#8627; @sub.CategoryId</span></td>
+                                <td>
+                                    @{
+                                        string subImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + sub.AttachmentURL);
+                                        if (System.IO.File.Exists(subImagePath))
+                                        {
+                                            <a href="@sub.AttachmentURL" target="_blank">
+                                                <img src="@sub.AttachmentURL" class="" width="60" height="60" alt="">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" target="_blank">
+                                                <img src="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" class="" width="60" height="60" alt="">
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center" style="padding-left:20px;">
+                                        <div>
+                                            <a href="#" class="text-default">@sub.Name</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="text-dark">@sub.ParentCategoryName</span></td>
+
+                                @if (sub.IsActive != null && sub.IsActive == false)
+                                {
+                                    <td><span class="badge bg-blue">Not Active</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="badge bg-success-400">Active</span></td>
+                                }
+
+                                <td><span class="text-dark">@(sub.CreatedOn.ToString("dd MMM, yyyy"))</span></td>
+
+                                <td class="text-center">
+                                    <div class="list-icons">
+                                        <div class="dropdown">
+                                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                @if (hasUpdateRecordRight)
+                                                {
+                                                    <a href="#!" class="dropdown-item text-indigo-600" onclick="showEditModal('@sub.CategoryId','@sub.Name','@sub.ParentCategoryId','@sub.IsActive' , '@sub.AttachmentId');"><i class="icon-database-edit2"></i>Edit</a>
+                                                }
+                                                @{
+                                                    ListingDeleteButton subDeleteButton = new ListingDeleteButton
+                                                    {
+                                                        EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0,
+                                                        primaryKeyColumn = "CategoryID",
+                                                        primarykeyValue = sub.CategoryId.ToString(),
+                                                        tableName = "Categories",
+                                                        SqlDeleteType = (short)SqlDeleteTypes.PlainTableDelete,
+                                                    };
+                                                }
+                                                @await Html.PartialAsync("~/Views/Common/_ListingDeleteButton.cshtml", subDeleteButton)
+                                                <a href="@Url.Action("DynamicLocalizationDetail" , "Dynamic" , new {langCode = Model?.PageBasicInfoObj?.langCode, PageTitle = nameof(LocalizationTablesEnum.Categories) , LocalizationTableId = (int)LocalizationTablesEnum.Categories , PKeyId = sub.CategoryId })" class="dropdown-item text-warning-600"><i class="icon-sphere me-3"></i>Other Langs</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+
+                // Also show any orphan subcategories (whose parent isn't in the list)
+                var listedParentIds = parentCategories.Select(p => (int?)p.CategoryId).ToHashSet();
+                var orphanSubs = Model.CategoryList.Where(c => c.ParentCategoryId != null && !listedParentIds.Contains(c.ParentCategoryId)).ToList();
+                foreach (var item in orphanSubs)
+                {
+                    <tr>
+                        <td><span class="text-dark">@item.CategoryId</span></td>
+                        <td>
+                            @{
+                                string oImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + item.AttachmentURL);
+                                if (System.IO.File.Exists(oImagePath))
+                                {
+                                    <a href="@item.AttachmentURL" target="_blank">
+                                        <img src="@item.AttachmentURL" class="" width="100" height="100" alt="">
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" target="_blank">
+                                        <img src="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" class="" width="100" height="100" alt="">
+                                    </a>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="text-default font-weight-semibold">@item.Name</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-dark">@item.ParentCategoryName</span></td>
+                        @if (item.IsActive != null && item.IsActive == false)
+                        {
+                            <td><span class="badge bg-blue">Not Active</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge bg-success-400">Active</span></td>
+                        }
+                        <td><span class="text-dark">@(item.CreatedOn.ToString("dd MMM, yyyy"))</span></td>
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        @if (hasUpdateRecordRight)
+                                        {
+                                            <a href="#!" class="dropdown-item text-indigo-600" onclick="showEditModal('@item.CategoryId','@item.Name','@item.ParentCategoryId','@item.IsActive' , '@item.AttachmentId');"><i class="icon-database-edit2"></i>Edit</a>
+                                        }
+                                        @{
+                                            ListingDeleteButton oDeleteButton = new ListingDeleteButton
+                                            {
+                                                EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0,
+                                                primaryKeyColumn = "CategoryID",
+                                                primarykeyValue = item.CategoryId.ToString(),
+                                                tableName = "Categories",
+                                                SqlDeleteType = (short)SqlDeleteTypes.PlainTableDelete,
+                                            };
+                                        }
+                                        @await Html.PartialAsync("~/Views/Common/_ListingDeleteButton.cshtml", oDeleteButton)
+                                        <a href="@Url.Action("DynamicLocalizationDetail" , "Dynamic" , new {langCode = Model?.PageBasicInfoObj?.langCode, PageTitle = nameof(LocalizationTablesEnum.Categories) , LocalizationTableId = (int)LocalizationTablesEnum.Categories , PKeyId = item.CategoryId })" class="dropdown-item text-warning-600"><i class="icon-sphere me-3"></i>Other Langs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="20"><b>  No record found </b></td>
+
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>
+
+
+
+<div class="row" id="pagination_div">
+
+    @{
+        if (Model != null && Model.pageHelperObj != null)
+        {
+            PagerHelper ph = new PagerHelper();
+            ph.CurrentPage = Model.pageHelperObj.CurrentPage;
+            ph.TotalRecords = Model.pageHelperObj.TotalRecords;
+            ph.RecordsPerPage = Model.pageHelperObj.RecordsPerPage;
+            ph.EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0;
+            ph.PageUrl = Url.Action("CategoriesList", "BasicData", new { langCode = Model?.PageBasicInfoObj?.langCode });
+
+            ph.AjaxEnabled = true;
+            ph.OnClientClickAjaxCall = "PaginationAfterAjax(this)";
+
+            @await Html.PartialAsync("~/Views/Common/_Pager.cshtml", ph)
+        }
+
+    }
+
+
+</div>
+
+<script>
+    $(document).on('click', '.toggle-subcategories', function () {
+        var parentId = $(this).data('parent-id');
+        var rows = $('.subcat-of-' + parentId);
+        var icon = $(this).find('i');
+        if (rows.first().is(':visible')) {
+            rows.hide();
+            icon.removeClass('icon-arrow-up12').addClass('icon-arrow-down12');
+        } else {
+            rows.show();
+            icon.removeClass('icon-arrow-down12').addClass('icon-arrow-up12');
+        }
+    });
+</script>

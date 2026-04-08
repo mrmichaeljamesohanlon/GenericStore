@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="noor-ecommerce-web-two\src\resources\themeContent\images\subscribe\" />
+    <Folder Include="noor-ecommerce-web-two\src\web\components\modal\" />
+  </ItemGroup>
+
+</Project>

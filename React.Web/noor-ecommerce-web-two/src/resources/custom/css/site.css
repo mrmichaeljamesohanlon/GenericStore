@@ -1,0 +1,525 @@
+#theme-slider {
+    margin-top: 15px;
+}
+
+/* ======================================================
+   Home Banner Slider – 3-panel cycling carousel
+   Local JPGs cycle through 3 image areas simultaneously
+   ====================================================== */
+
+.spark-banner-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.spark-banner-slide {
+    position: relative;
+    overflow: hidden;
+    padding: 0 4px;
+  aspect-ratio: 16 / 7;
+}
+
+.spark-banner-img {
+    width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+    display: block;
+}
+
+/* Slick dot customisation */
+.spark-banner-slider .slick-dots {
+    bottom: -28px;
+}
+
+.spark-banner-slider .slick-dots li button:before {
+    color: #000;
+    opacity: 0.4;
+    font-size: 10px;
+}
+
+.spark-banner-slider .slick-dots li.slick-active button:before {
+    color: #FFD600;
+    opacity: 1;
+}
+
+/* Slick arrow customisation */
+.spark-banner-slider .slick-prev,
+.spark-banner-slider .slick-next {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+}
+
+.spark-banner-slider .slick-prev {
+    left: 0;
+}
+
+.spark-banner-slider .slick-next {
+    right: 0;
+}
+
+.spark-banner-slider .slick-prev:before,
+.spark-banner-slider .slick-next:before {
+    font-size: 40px;
+    color: #FFD600;
+    opacity: 0.85;
+}
+
+.spark-banner-slider-wrap {
+    padding-bottom: 40px;
+}
+
+@media (max-width: 767px) {
+  .spark-banner-slide {
+    aspect-ratio: 16 / 9;
+  }
+
+    .spark-banner-img {
+    height: 100%;
+    }
+}
+
+/* Static fallback banner styles */
+.slider-banner.slide-banner-static {
+    position: relative;
+    min-height: 420px;
+    display: flex !important;
+    align-items: center;
+}
+
+.static-banner-contain {
+    position: relative;
+    z-index: 2;
+    padding: 60px 50px;
+}
+
+.static-banner-contain h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+.static-banner-contain h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 30px;
+}
+
+.static-banner-bg-1 {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+}
+
+.static-banner-bg-2 {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1c1c1c 40%, #2d2d2d 100%);
+}
+
+.static-banner-bg-3 {
+    background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 40%, #7a3f00 100%);
+}
+
+@media (max-width: 767px) {
+    .slider-banner.slide-banner-static {
+        min-height: 280px;
+    }
+
+    .static-banner-contain {
+        padding: 30px 20px;
+    }
+
+    .static-banner-contain h1 {
+        font-size: 1.6rem;
+    }
+
+    .static-banner-contain h2 {
+        font-size: 0.95rem;
+    }
+}
+
+.required-field {
+  color: #FFD600;
+}
+
+.subscribe-bnt {
+    border-right: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-radius: 0px;
+    background: #dddddd45;
+}
+
+.home-banner-bg {
+    background: #d3ecf3 !important;
+}
+
+.home-btn-banner-left {
+    font-size: 14px;
+    padding: 18px 45px;
+    font-weight: 700;
+    color: #000 !important;
+    background-color: #FFD600;
+    position: relative;
+    transition: all .3s;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 0;
+    letter-spacing: .05em;
+}
+
+.home-btn-banner-left:hover {
+  background-color: #000 !important;
+  color: #FFD600 !important;
+}
+
+.home-top-title {
+  color: #FFD600 !important;
+}
+
+.dis-empty-value {
+  color: #FFD600 !important;
+}
+
+.custom-rating {
+    line-height: 1.4;
+    margin-top: 0;
+}
+
+.custom-rating .custom-yellow-star {
+    color: #FFD600;
+    font-size: calc(11px + 3*(100vw - 320px)/1600);
+    margin-right: 4px;
+}
+
+.custom-rating .custom-grey-star {
+    color: #000;
+    font-size: calc(11px + 3*(100vw - 320px)/1600);
+    margin-right: 4px;
+}
+
+.product-color-cell-active {
+    border: 2px solid #FFD600;
+    box-shadow: 0 0 0 1px #000;
+}
+
+.size-box-custom {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.size-box-custom ul li {
+    height: 35px;
+    line-height: 35px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 1px solid #FFD600;
+    text-align: center;
+    width: 42px;
+    padding: 0px 9px 0px 9px;
+    border-radius: 4px;
+}
+.size-box-custom ul li a{
+  color: #000;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.size-box-custom ul li.active{
+  background-color: #FFD600;
+}
+.product-det-rating-sec{
+    margin-bottom: 12px;
+    display: flex;
+    margin-top: 5px;
+    content: cen;
+
+}
+
+.product-det-rating-sec a{
+    text-align: center;
+    border-bottom: 1px solid #FFD600;
+    color: #FFD600;
+    display: inline-block;
+    line-height: normal;
+    margin-left: 5px;
+}
+
+@media (max-width: 991px) {
+    .product-det-rating-sec {
+      text-align: center;
+         justify-content: center;
+    }
+  }
+
+  .product-info-custom {
+
+    margin-bottom: 20px;
+  }
+  
+  .product-info-custom-item {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .product-info-custom-label {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #FFD600;
+
+  }
+  .product-info-custom-value {
+    font-weight: normal;
+  }
+  .prod-det-desc-box{
+    margin: 20px 10px 10px;
+  }
+  /* to fit image inside the div */
+  .prod-det-desc-box img{
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .review-item-prod-detail{
+    border-top: 1px dashed #FFD600;
+    margin-top: 30px;
+    padding-right: 200px;
+    padding-top: 30px;
+    position: relative;
+  }
+
+  .review-item-prod-detail h3{
+    margin-bottom: 8px;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .review-item-prod-detail span{
+    display: block;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .review-item-prod-detail strong{
+    font-weight: 600;
+  }
+  .review-item-prod-detail p{
+    margin-bottom: 0 !important;
+    padding: 0.5px !important;
+    color: #000 !important;
+  }
+
+
+  .star-rating-review-form {
+    font-size: 1.7rem;
+  }
+  
+  .star-rating-review-form span {
+    color: #d4dae8;
+    cursor: pointer;
+    margin-right: 0.2rem;
+    
+  }
+  
+  .star-rating-review-form span:hover,
+  .star-rating-review-form span.star-filled {
+    color: #ffa800;
+  }
+  .pagination-li-item-custom {
+    margin: 0 2px;
+  }
+  .order-history-view i{
+    color: #FFD600;
+    font-size: 18px;
+  }
+
+  .order-total-check-lbl{
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    line-height: 20px;
+  }
+  .order-total-check-val{
+    font-size: 18px;
+    line-height: 20px;
+    color: #FFD600;
+    font-weight: 600;
+  }
+  .product-variant-title{
+    color: #FFD600;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+/* ======================================================
+   Meteor Hero Section
+   ====================================================== */
+
+/* Container */
+.meteor-hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background: radial-gradient(ellipse at 80% 20%, #1a1a3e 0%, #0d0d22 55%, #000010 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Subtle dark overlay for depth */
+.meteor-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Meteor streaks ---- */
+@keyframes meteorFall {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-600px);
+    opacity: 0;
+  }
+}
+
+.meteor-streak {
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 120px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, transparent 100%);
+  box-shadow: 0 0 8px 1px rgba(255,255,255,0.35), 0 0 20px 3px rgba(180,180,255,0.2);
+  animation: meteorFall linear infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ---- Text content ---- */
+.meteor-hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 780px;
+}
+
+.meteor-hero-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #FFD600;
+  margin-bottom: 18px;
+}
+
+/* Main heading */
+.meteor-hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 22px;
+  line-height: 1.15;
+}
+
+.meteor-hero-title-line {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  /* subtle text-glow */
+  text-shadow:
+    0 0 18px rgba(255,214,0,0.25),
+    0 0 40px rgba(255,214,0,0.1);
+}
+
+/* Animated shimmer on the highlighted word */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.meteor-hero-title-highlight {
+  background: linear-gradient(
+    90deg,
+    #FFD600 0%,
+    #fff8c0 35%,
+    #FFD600 50%,
+    #fff8c0 65%,
+    #FFD600 100%
+  );
+  background-size: 400px 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3.5s linear infinite;
+  text-shadow: none;
+}
+
+.meteor-hero-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 38px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA button */
+.meteor-hero-btn {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 16px 46px;
+  background-color: #FFD600;
+  color: #000 !important;
+  border-radius: 0;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(255,214,0,0.3);
+}
+
+.meteor-hero-btn:hover {
+  background-color: #ffffff;
+  color: #000 !important;
+  box-shadow: 0 0 36px rgba(255,255,255,0.25);
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .meteor-hero-section {
+    min-height: 380px;
+  }
+  .meteor-hero-content {
+    padding: 40px 16px;
+  }
+  .meteor-hero-title-line {
+    font-size: 2rem;
+  }
+  .meteor-hero-subtitle {
+    font-size: 0.9rem;
+  }
+}
+  
+/* Card details modal - Spark logo */
+.card-details-logo {
+  max-width: 180px;
+}

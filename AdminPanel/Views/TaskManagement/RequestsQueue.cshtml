@@ -1,0 +1,359 @@
+﻿@model Entities.MainModels.TasksManagementModel
+
+@{
+    #region page basic info
+    ViewData["Title"] = Model?.PageBasicInfoObj?.PageTitle ?? "";
+    ViewData["EntityId"] = Model?.PageBasicInfoObj?.EntityId ?? 0;
+
+    #endregion
+}
+
+
+
+@{
+
+
+    Dictionary<string, string>? requestTypesIDs = new Dictionary<string, string>();
+    requestTypesIDs = Model != null && Model.requestTypesList != null && Model.requestTypesList.Count > 0 ?
+    Model.requestTypesList?.ToList().ToDictionary(v => v.RequestTypeId.ToString(), t => t.RequestTypeName) : null;
+
+
+    Dictionary<string, string>? requestStatusesIDs = new Dictionary<string, string>();
+    requestStatusesIDs = Model != null && Model.requestStatusesList != null && Model.requestStatusesList.Count > 0 ?
+    Model.requestStatusesList?.ToList().ToDictionary(v => v.RequestStatusId.ToString(), t => t.StatusKey) : null;
+
+
+}
+
+<!-- Page header -->
+@{
+    PageHeader pageHeader = new PageHeader
+            {
+                EntityId = Model?.PageBasicInfoObj != null ? Model.PageBasicInfoObj.EntityId : 0,
+                PageTitle = Model?.PageBasicInfoObj?.PageTitle ?? "Page Info",
+                ShowAddNewButton = false,
+                ShowActionsButton = true,
+                ShowExportToPdfButton = false,
+                ShowExportToExcelButton = true,
+                DataExportUrl = Url.Action("RequestsQueue", "TaskManagement", new { langCode = Model?.PageBasicInfoObj?.langCode })
+            };
+
+}
+@await Html.PartialAsync("~/Views/Common/_PageHeader.cshtml", pageHeader)
+<!-- /page header -->
+
+
+
+<div class="content">
+
+
+    <!-- Error Area -->
+    <div id="error-messages-area">
+        @{
+            SuccessErrorMsgEntity? successErrorMsgEntity = new SuccessErrorMsgEntity();
+            successErrorMsgEntity = Model.SuccessErrorMsgEntityObj == null ? new SuccessErrorMsgEntity() : Model.SuccessErrorMsgEntityObj;
+        }
+
+        @await Html.PartialAsync("~/Views/Common/_SuccessErrorMsg.cshtml", successErrorMsgEntity)
+    </div>
+    <!-- /Error Area -->
+    <!-- Search Area Starts Here -->
+    <div class="card border-left-3 border-left-slate">
+        <div class="card-header header-elements-inline">
+            @await Html.PartialAsync("~/Views/Common/PartialViews/_PageSearchTitle.cshtml")
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Page search form -->
+            @{
+                SearchFilterModel filter = new SearchFilterModel();
+
+                #region basic settings
+                filter.SearchJSFunctionName = "SearchRecord();";
+                filter.SearchButtonType = "button";
+                filter.EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0;
+                filter.SearchURL = Url.Action("RequestsQueue", "TaskManagement", new { langCode = Model?.PageBasicInfoObj?.langCode });
+                #endregion
+
+                filter.SearchFilterEntityList = new List<HtmlFormFieldsEntity>()
+            {
+            new HtmlFormFieldsEntity(){ FieldID = "TaskId", FieldName="TaskId",  FieldTypeID = (short)HTMLFieldTypeEnums.Number, PlaceHolderText="Task Id", LabelText="Task Id", ToolTipText="Enter here the task id", DropdownData=null},
+            new HtmlFormFieldsEntity(){ FieldID = "RequestTypeId", FieldName="RequestTypeId",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, DropdownSelectType =  (short)HtmlDropdownSelectType.Simple, PlaceHolderText="Select Request Type", LabelText="Rquest Type" , IsRequired=false , DropdownData = requestTypesIDs},
+            new HtmlFormFieldsEntity(){ FieldID = "RequestStatusId", FieldName="RequestStatusId",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, DropdownSelectType =  (short)HtmlDropdownSelectType.Simple, PlaceHolderText="Select Request Status", LabelText="Request Status" , IsRequired=false , DropdownData = requestStatusesIDs},
+
+
+            };
+            }
+
+            @await Html.PartialAsync("~/Views/Common/_SearchFilter.cshtml", filter)
+            <!-- /page search form -->
+
+
+        </div>
+    </div>
+    <!-- Search Area Ends Here -->
+    <!-- Inverse colors -->
+    <div class="card border-left-3 border-left-slate">
+        <div class="card-header header-elements-inline">
+            @await Html.PartialAsync("~/Views/Common/PartialViews/_PageGridTitle.cshtml", Model?.PageBasicInfoObj)
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <div class="table-responsive" id="main_data_table">
+                        @await Html.PartialAsync("~/Views/TaskManagement/PartialViews/_RequestsQueue.cshtml", Model)
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /inverse colors -->
+
+
+
+
+</div>
+
+
+<div id="modal_requests_queue" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-header site-bg-modal-header">
+                <h5 class="modal-title" id="lbl_task_modal_title">Request</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body" id="request_body_area">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline bg-teal-400 text-teal-400 border-teal-400 border-2" data-dismiss="modal" id="lbl_invoice_close_btn">Close</button>
+                @*  <button type="button" class="btn bg-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section  Scripts{
+
+    <script>
+
+
+        function showRequestQueueModal(TaskId, RequestTypeId) {
+
+            switch (RequestTypeId) {
+                case '@((int)RequestTypesEnum.VendorRequest)':
+                    getVendorRequestDataForRequestQueue(TaskId);
+                    setTaskRequestHeader("Vendor Request");
+                    break;
+
+                case '@((int)RequestTypesEnum.OrderRefundRequest)':
+                    getOrderRefundRequestDataForRequestQueue(TaskId);
+                    setTaskRequestHeader("Order Refund Request");
+                    break;
+
+                default:
+                    console.log("No request type specified!");
+                    break;
+            }
+
+            $('#modal_requests_queue').modal('show');
+
+        }
+
+
+        function setTaskRequestHeader(title) {
+            $('#lbl_task_modal_title').html(title);
+        }
+
+        function SubmitTaskManagementRequest(TaskId) {
+            let RequestStatusId = $('#RequestStatusIdModal').val();
+
+            if (!checkIfStringIsEmtpy(TaskId) || TaskId < 1) {
+                showSuccessErrorMsg("error", "Error", "Empty Task Id! Please try again!");
+                return false;
+            }
+            if (!checkIfStringIsEmtpy(RequestStatusId) || RequestStatusId < 1) {
+                showSuccessErrorMsg("error", "Error", "Please select request status id!");
+                return false;
+            }
+
+            //--make form data
+            var formDate = {
+                TaskId: TaskId,
+                RequestStatusId: RequestStatusId,
+                DataOperationType: '@((short)DataOperationType.Update)'
+            }
+
+
+            // ✅ Show loader area starts here
+            showHideSiteMainLoader(true);
+            // ✅ Show loader area ends here
+
+            let saveUrl = "@Url.Action("SubmitTaskManagementRequest", "TaskManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+                data: formDate,
+                // datatype: "json",
+                cache: false,
+                async: false,
+
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        showSuccessErrorMsg("success", "Success", "Updated Successfully!");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else {
+
+                        showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                    }
+
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+                }
+            })
+
+        }
+
+        function getVendorRequestDataForRequestQueue(TaskId) {
+
+
+            //--First empty existing data
+            $('#request_body_area').html("");
+
+            let formData = {
+                TaskId: TaskId
+            }
+
+            let getUrl = "@Url.Action("GetVendorRequestDataForRequestQueue", "TaskManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+
+            $.ajax({
+                type: "GET",
+                url: getUrl,
+                data: formData,
+                // datatype: "json",
+                cache: false,
+                async: false,
+
+                success: function (data) {
+
+                    if (data != undefined && data != null) {
+                        setTimeout(function () {
+                            $('#request_body_area').html(data);
+                        }, 200);
+                    } else {
+                        showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                    }
+
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                }
+            })
+        }
+
+        function getOrderRefundRequestDataForRequestQueue(TaskId) {
+
+
+            //--First empty existing data
+            $('#request_body_area').html("");
+
+            let formData = {
+                TaskId: TaskId
+            }
+
+            let getUrl = "@Url.Action("GetOrderRefundRequestDataForRequestQueue", "TaskManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+
+
+            // ✅ Show loader area starts here
+            showHideSiteMainLoader(true);
+            // ✅ Show loader area ends here
+
+
+            $.ajax({
+                type: "GET",
+                url: getUrl,
+                data: formData,
+                // datatype: "json",
+                cache: false,
+                async: false,
+
+                success: function (data) {
+
+                    if (data != undefined && data != null) {
+                        setTimeout(function () {
+                            $('#request_body_area').html(data);
+                        }, 200);
+                    } else {
+                        showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                    }
+
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+                }
+            })
+        }
+
+
+    </script>
+
+}

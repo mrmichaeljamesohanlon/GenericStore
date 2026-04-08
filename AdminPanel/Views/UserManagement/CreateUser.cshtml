@@ -1,0 +1,751 @@
+﻿@model Entities.MainModels.UserManagementModel
+
+@{
+    #region page basic info
+    ViewData["Title"] = Model?.PageBasicInfoObj?.PageTitle ?? "";
+    ViewData["EntityId"] = Model?.PageBasicInfoObj?.EntityId ?? 0;
+
+    #endregion
+}
+
+
+<!--Page specific java script-->
+<script src="~/content/themeContent/global_assets/js/demo_pages/form_checkboxes_radios.js"></script>
+<script src="~/content/themeContent/global_assets/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+<script src="~/content/themeContent/global_assets/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+<script src="~/content/themeContent/global_assets/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+<script src="~/content/themeContent/global_assets/js/demo_pages/uploader_bootstrap.js"></script>
+<!--/Page specific java script-->
+@{
+    List<SelectListItem> ActiveInactiveStatus = new List<SelectListItem>();
+    ActiveInactiveStatus.Add(new SelectListItem { Value = "true", Text = "Active" });
+    ActiveInactiveStatus.Add(new SelectListItem { Value = "false", Text = "In Active" });
+
+    Dictionary<string, string>? IsActiveDropDown = new Dictionary<string, string>();
+    IsActiveDropDown = ActiveInactiveStatus.ToDictionary(v => v.Value, t => t.Text);
+
+
+}
+
+<!-- Page header -->
+@{
+    PageHeader pageHeader = new PageHeader
+            {
+                PageTitle = Model?.PageBasicInfoObj?.PageTitle ?? "Page Info",
+                ShowAddNewButton = false,
+                ShowActionsButton = false,
+                ShowExportToPdfButton = false,
+                ShowExportToExcelButton = false,
+                ShowGoBackButton = true,
+
+            };
+
+}
+@await Html.PartialAsync("~/Views/Common/_PageHeader.cshtml", pageHeader)
+<!-- /page header -->
+
+
+
+<div class="content">
+
+
+    <!-- Error Area -->
+    <div id="error-messages-area">
+        @{
+            SuccessErrorMsgEntity? successErrorMsgEntity = new SuccessErrorMsgEntity();
+            successErrorMsgEntity = Model.SuccessErrorMsgEntityObj == null ? new SuccessErrorMsgEntity() : Model.SuccessErrorMsgEntityObj;
+        }
+
+        @await Html.PartialAsync("~/Views/Common/_SuccessErrorMsg.cshtml", successErrorMsgEntity)
+    </div>
+    <!-- /Error Area -->
+
+    <form class="form-validate-jquery" id="data-insert-form" action="#">
+
+
+        <div class="card border-left-3 border-left-slate">
+            <div class="card-header header-elements-inline">
+                <h6 class="card-title" id="lbl_user_page_sub_title">@(Model?.PageBasicInfoObj?.PageTitle ?? "Page Info")</h6>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        @*  <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-tabs-highlight mb-0">
+                    <li class="nav-item"><a href="#bordered-tab1" class="nav-link active" data-toggle="tab"><i class="icon-user mr-2"></i><span id="lbl_usr_info_tab">User Info</span> </a></li>
+                    <li class="nav-item"><a href="#bordered-tab2" class="nav-link" data-toggle="tab"><i class="icon-address-book mr-2"></i><span id="lbl_usr_address_tab">Address</span></a></li>
+                    <li class="nav-item"><a href="#bordered-tab5" class="nav-link" data-toggle="tab"><i class="icon-file-picture mr-2"></i><span id="lbl_usr_pictures_tab">Pictures</span> </a></li>
+
+
+                </ul>
+
+                <div class="tab-content card card-body border-top-0 rounded-top-0 mb-0">
+                    <div class="tab-pane fade show active" id="bordered-tab1">
+                        <fieldset class="mb-3">
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_firstName">First Name</span>
+                                    <span class="text-danger">*</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="FirstName" id="FirstName" class="form-control" required placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_middleName">  Middle Nme</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="MiddleName" id="MiddleName" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_lastName">   Last Name</span>
+                                    <span class="text-danger">*</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="LastName" id="LastName" class="form-control" required placeholder="">
+                                </div>
+                            </div>
+
+                         
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_emailAddress">   Email Address</span>
+                                    <span class="text-danger">*</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="email" name="EmailAddress" id="EmailAddress" class="form-control" required placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_userType">    User Type</span>
+                                    <span class="text-danger">*</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="UserTypeId" name="UserTypeId" data-placeholder="Select a User Type..." class="form-control" required>
+                                        <option value="">Select a User Type...</option>
+
+                                        @{
+                                            if (Model != null && Model.UserTypesList != null && Model.UserTypesList.Count > 0)
+                                            {
+                                                foreach (var item in Model.UserTypesList)
+                                                {
+                                                    <option value="@item.UserTypeId">@item.UserTypeName</option>
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_userRole">    User Role</span>
+                                  @*  <span class="text-danger">*</span>*@
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="RoleId" name="RoleId" data-placeholder="Select a User Role..." class="form-control">
+                                        <option value="">Select a User Role...</option>
+
+                                        @{
+                                            if (Model != null && Model.RolesList != null && Model.RolesList.Count > 0)
+                                                                            {
+                                                foreach (var item in Model.RolesList)
+                                                {
+                                                    <option value="@item.RoleId">@item.RoleName</option>
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_phone">   Phone</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="tel" name="PhoneNo" id="PhoneNo" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_mobile">    Mobile No</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="tel" name="MobileNo" id="MobileNo" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_dateOfBirth">    Date Of Birth</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <span class="input-group-text"><i class="icon-calendar22 mr-2"></i></span>
+                                            </span>
+                                            <input type="text" id="DateOfBirth" name="DateOfBirth" class="form-control date-filter-exclude pickadate" value="" placeholder="Date Of Birth &hellip;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_gender">   Gender</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="Gender" name="Gender" data-placeholder="Select a Gender Type..." class="form-control" required>
+
+                                        <option value="Male" selected>Male</option>
+                                        <option value="Female">Female</option>
+
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_password">   Password</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="password" name="Password" id="Password" class="form-control" required placeholder="">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_confirm_password">    Confirm Password</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="password" name="ConfirmPassword" id="ConfirmPassword" required class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_isActive">     Is Active</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" id="IsActive" name="IsActive" class="form-check-input-styled-info" checked data-fouc>
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_isVerified">      Is Verified</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" id="IsVerified" name="IsVerified" class="form-check-input-styled-info" checked data-fouc>
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </fieldset>
+                    </div>
+
+                    <div class="tab-pane fade" id="bordered-tab2">
+                        <fieldset class="mb-3">
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_country">     Country</span>
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="CountryId" name="CountryId" onchange="GetStateByCountryId();" data-placeholder="Select a Country..." class="form-control" required>
+                                        <option value="">Select a Country...</option>
+
+                                        @{
+                                            if (Model != null && Model.CountriesList != null && Model.CountriesList.Count > 0)
+                                            {
+                                                foreach (var item in Model.CountriesList)
+                                                {
+                                                    <option value="@item.CountryId">@item.CountryName</option>
+                                                }
+                                            }
+                                        }
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_state">     State</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="StateProvinceId" name="StateProvinceId" onchange="GetCityByStateId();" data-placeholder="Select a State..." class="form-control">
+                                        <option value="">Select a State...</option>
+                                        <option value="-999">Other</option>
+
+
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_city">     City</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <select id="CityId" name="CityId" data-placeholder="Select a City..." class="form-control">
+                                        <option value="">Select a City...</option>
+                                        <option value="-999">Other</option>
+
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_address_line_one">      Address Line One</span>
+                                    <span class="text-danger">*</span>
+
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="AddressLineOne" id="AddressLineOne" class="form-control" required placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_address_line_two">      Address Line Two</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="AddressLineTwo" id="AddressLineTwo" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_postalCode">    Postal Code</span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="PostalCode" id="PostalCode" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+
+
+
+                        </fieldset>
+                    </div>
+
+
+
+                    <div class="tab-pane fade" id="bordered-tab5">
+                        <fieldset class="mb-3">
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">
+
+                                    <span id="lbl_usr_new_profileImg">   Profile Images</span>
+                                    <span class="text-danger">*</span>
+                                    <span data-popup="tooltip" title="" data-placement="right" data-original-title="Select any category from the dropdown"><i class="icon-question4 ml-1 form-tooltip-color"></i> </span>
+                                </label>
+                                <div class="col-lg-9">
+                                    <input type="file" id="ProfilePictureFile" name="ProfilePictureFile" class="file-input" data-show-upload="false" data-show-caption="true" data-show-preview="true" data-fouc>
+
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="d-flex justify-content-end align-items-center">
+                    <button type="reset" onclick="resetAnyFormById('data-insert-form');" class="btn btn-light" id="reset"><span id="lbl_usr_new_reset_btn">Reset</span>    <i class="icon-reload-alt ml-2"></i></button>
+                    <button type="submit" onclick="SaveFormRecord();" class="btn btn-primary ml-3"><span id="lbl_usr_new_save_btn">Save</span>    <i class="icon-paperplane ml-2"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+</div>
+@section  Scripts{
+
+
+
+    <script>
+
+
+
+
+
+        function SaveFormRecord() {
+
+            debugger
+
+
+
+            // ✅ On formt submit,fire event prevent
+            $("#data-insert-form").submit(function (e) {
+                e.preventDefault();
+            });
+
+            // ✅ Check if form is valid
+            if (!$("#data-insert-form").valid()) {
+                event.preventDefault();
+                showSuccessErrorMsg("error", "Error", "Please fill all required fields!");
+                return false;
+            }
+
+            // ✅ Check the validation of form in a new additional way
+            if (!validateInsertForm("data-insert-form")) {
+                event.preventDefault();
+                showSuccessErrorMsg("error", "Error", "Please fill all required fields!");
+                return false;
+            }
+
+            //-- #region All fields values getting area starts here
+            let FirstName = $("#FirstName").val();
+            let MiddleName = $("#MiddleName").val();
+            let LastName = $("#LastName").val();
+           
+            let EmailAddress = $("#EmailAddress").val();
+            let UserTypeId = $("#UserTypeId").val();
+            let RoleId = $("#RoleId").val();
+            let PhoneNo = $("#PhoneNo").val();
+            let MobileNo = $("#MobileNo").val();
+            let DateOfBirth = $("#DateOfBirth").val();
+            let Gender = $("#Gender").val();
+            let Password = $("#Password").val();
+            let ConfirmPassword = $("#ConfirmPassword").val();
+            let IsActive = ($('#IsActive').is(":checked") == true) ? true : false;
+            let IsVerified = ($('#IsVerified').is(":checked") == true) ? true : false;
+            let CountryId = $("#CountryId").val();
+            let StateProvinceId = $("#StateProvinceId").val();
+            let CityId = $("#CityId").val();
+            let AddressLineOne = $("#AddressLineOne").val();
+            let AddressLineTwo = $("#AddressLineTwo").val();
+            let PostalCode = $("#PostalCode").val();
+
+            var ProfilePictureFile = $("#ProfilePictureFile").get(0).files;
+
+
+
+
+            //--confirm password
+            if (Password != ConfirmPassword) {
+                showSuccessErrorMsg("error", "Error", "Password does not match!");
+                return false;
+            }
+
+
+
+            //-- #region Form initialization area starts here
+            var fileData = new FormData();
+
+            for (var i = 0; i < ProfilePictureFile.length; i++) {
+                fileData.append("ProfilePictureFile", ProfilePictureFile[i]);
+            }
+            fileData.append("FirstName", FirstName);
+            fileData.append("MiddleName", MiddleName);
+            fileData.append("LastName", LastName);
+            fileData.append("EmailAddress", EmailAddress);
+            fileData.append("UserTypeId", UserTypeId);
+            fileData.append("RoleId", RoleId);
+            fileData.append("PhoneNo", PhoneNo);
+            fileData.append("MobileNo", MobileNo);
+            fileData.append("DateOfBirth", DateOfBirth);
+            fileData.append("Gender", Gender);
+            fileData.append("Password", Password);
+            fileData.append("IsActive", IsActive);
+            fileData.append("IsVerified", IsVerified);
+            fileData.append("CountryId", CountryId);
+            fileData.append("StateProvinceId", StateProvinceId);
+            fileData.append("CityId", CityId);
+            fileData.append("AddressLineOne", AddressLineOne);
+            fileData.append("AddressLineTwo", AddressLineTwo);
+            fileData.append("PostalCode", PostalCode);
+            //-- #endRegion Form initialization area ends here
+
+
+
+            let saveUrl = "@Url.Action("CreateNewUserPost", "UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+
+
+            // ✅ Show loader area starts here
+            showHideSiteMainLoader(true);
+            // ✅ Show loader area ends here
+
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+                dataType: "json",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+
+
+                    if (data.success) {
+                        showSuccessErrorMsg("success", "Success", data.message);
+
+                        setTimeout(function () {
+                            window.location.href = "@Url.Action("UsersList","UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+                        }, 1000);
+
+                    }
+                    else {
+
+                        showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    showSuccessErrorMsg("error", "Error", "Something went wrong. Please try again");
+
+                    // ✅ Stop loader area starts here
+                    let LoaderTimeDuration = '@ConstantsHelper.SiteMainLoaderDuration()';
+                    setTimeout(function () {
+                        showHideSiteMainLoader(false);
+                    }, LoaderTimeDuration ?? 2000);
+                    // ✅ Stop loader area ends here
+                }
+            });
+
+        }
+
+
+        function GetStateByCountryId() {
+
+
+            let CountryId = $('#CountryId').val();
+
+            if (!checkIfStringIsEmtpy(CountryId)) {
+                let emptyState = '<option value="">Select a State...</option>';
+                emptyState = emptyState + '<option value="-999">Other</option>';
+                $("#StateProvinceId").html(emptyState);
+
+                let emptyCity = '<option value="">Select a City...</option>';
+                emptyCity = emptyCity + '<option value="-999">Other</option>';
+                $("#CityId").html(emptyCity);
+                return false;
+            }
+
+            //--First make empty the drop downs of state and city
+            let emptyState = '<option value="">Select a State...</option>';
+            emptyState = emptyState + '<option value="-999">Other</option>';
+            $("#StateProvinceId").html(emptyState);
+
+
+            let emptyCity = '<option value="">Select a City...</option>';
+            emptyCity = emptyCity + '<option value="-999">Other</option>';
+            $("#CityId").html(emptyCity);
+
+            //--make form data
+            var formDate = {
+                CountryId: CountryId
+            }
+
+            let saveUrl = "@Url.Action("GetStateByCountryId", "UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+            $.ajax({
+                type: "GET",
+                url: saveUrl,
+                data: formDate,
+                // datatype: "json",
+                cache: false,
+                async: false,
+
+                success: function (data) {
+
+                    if (data.success) {
+                        let s = '<option value="">Select a State...</option>';
+
+                        if (data.result != undefined && data.result.length > 0) {
+                            for (var i = 0; i < data.result.length; i++) {
+                                s += '<option value="' + data.result[i].displayValue + '">' + data.result[i].displayText + '</option>';
+
+                            }
+                            s = s + '<option value="-999">Other</option>';
+                            $("#StateProvinceId").html(s);
+                        } else {
+                            s = s + '<option value="-999">Other</option>';
+                            $("#StateProvinceId").html(s);
+                        }
+
+
+                    } else {
+                        showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                }
+            })
+
+        }
+
+
+        function GetCityByStateId() {
+
+
+            let StateProvinceId = $('#StateProvinceId').val();
+
+            if (!checkIfStringIsEmtpy(StateProvinceId)) {
+                let emptyCity = '<option value="">Select a City...</option>';
+                emptyCity = emptyCity + '<option value="-999">Other</option>';
+                $("#CityId").html(emptyCity);
+                return false;
+            }
+
+            //--First make empty city
+            let emptyCity = '<option value="">Select a City...</option>';
+            emptyCity = emptyCity + '<option value="-999">Other</option>';
+            $("#CityId").html(emptyCity);
+
+            //--make form data
+            var formDate = {
+                StateProvinceId: StateProvinceId
+            }
+
+            let saveUrl = "@Url.Action("GetCityByStateId", "UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+            $.ajax({
+                type: "GET",
+                url: saveUrl,
+                data: formDate,
+                // datatype: "json",
+                cache: false,
+                async: false,
+
+                success: function (data) {
+
+                    if (data.success) {
+
+                        let s = '<option value="">Select a City...</option>';
+
+                        if (data.result != undefined && data.result.length > 0) {
+                            for (var i = 0; i < data.result.length; i++) {
+                                s += '<option value="' + data.result[i].displayValue + '">' + data.result[i].displayText + '</option>';
+                            }
+                            s = s + '<option value="-999">Other</option>';
+                            $("#CityId").html(s);
+                        } else {
+                            s = s + '<option value="-999">Other</option>';
+                            $("#CityId").html(s);
+                        }
+
+
+
+                    } else {
+                        showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                }
+            })
+
+        }
+
+
+
+
+    </script>
+
+}

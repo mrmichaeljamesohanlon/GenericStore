@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E03131"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </linearGradient>
+    <linearGradient id="caliper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8A80"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="12" fill="url(#bg4)"/>
+  <!-- Brake disc -->
+  <circle cx="130" cy="100" r="68" fill="none" stroke="#FF8A80" stroke-width="4" stroke-dasharray="14 7"/>
+  <circle cx="130" cy="100" r="48" fill="none" stroke="#FF8A80" stroke-width="2.5" stroke-dasharray="10 5"/>
+  <circle cx="130" cy="100" r="22" fill="#E03131" stroke="#FF8A80" stroke-width="4"/>
+  <!-- Caliper -->
+  <rect x="178" y="62" width="46" height="76" rx="10" fill="url(#caliper)" stroke="#FF8A80" stroke-width="2.5"/>
+  <rect x="184" y="74" width="16" height="22" rx="5" fill="#FF8A80"/>
+  <rect x="184" y="102" width="16" height="22" rx="5" fill="#FF8A80"/>
+  <circle cx="211" cy="82" r="5" fill="#FFD700"/>
+</svg>

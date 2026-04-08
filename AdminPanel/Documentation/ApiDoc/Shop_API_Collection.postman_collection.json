@@ -1,0 +1,1347 @@
+{
+	"info": {
+		"_postman_id": "1747d0f8-a581-465f-97d6-88d5bbabe114",
+		"name": "Shop_API_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Web Campaign List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n      \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-web-campaign-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-web-campaign-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Order Hsitory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n       \"UserId\" : 8 ,\r\n       \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-customer-order-history-master",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-customer-order-history-master"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Order Hsitory Detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n       \"OrderId\" : 24 ,\r\n       \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-customer-order-history-detail",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-customer-order-history-detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Web Campaing Detail By Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n       \"CampaignId\" : 5,\r\n      \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-web-campaign-detail",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-web-campaign-detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Coupon Code Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"CouponCode\": \"test123\",\r\n        \"cartJsonData\": [{\"ProductId\":\"44\",\"productSelectedAttributes\":[{\"ProductId\":\"44\",\"ProductAttributeID\":2,\"PrimaryKeyValue\":2},{\"ProductId\":\"44\",\"ProductAttributeID\":1,\"PrimaryKeyValue\":10}],\"Quantity\":2,\"ShippingCharges\":0,\"DefaultImage\":\"/content/commonImages/productImages/123_28d_offer-img1 - Copy.jpg\"}]\r\n     \r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-coupon-code-data",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-coupon-code-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Size List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEzIiwibmJmIjoxNjYzMzM1NDMwLCJleHAiOjE2NjMzMzkwMzAsImlhdCI6MTY2MzMzNTQzMCwiaXNzIjoiaHR0cHM6Ly9hcGlzb2x1dGlvbi5pbnN0YWtpbi5jb20vIn0.BhFjOK_924wuORpOBo248OYOMCpAUzOwcLZxXFW1mPE",
+						"type": "default"
+					},
+					{
+						"key": "UserID",
+						"value": "13",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 1,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-size-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-size-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"UserID\": 1000,\r\n    \"FirstName\": \"\",\r\n    \"LastName\": \"\",\r\n    \"MobileNo\": \"\",\r\n    \"AddressLineOne\": \"\",\r\n    \"CityId\": \"-999\",\r\n    \"StateProvinceId\": \"-999\",\r\n    \"PostalCode\": \"\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/update-profile",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"update-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Home Screen Banner",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-home-screen-banner",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-home-screen-banner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Customer Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"UserID\": 1,\r\n        \"OrderNote\": 1,\r\n        \"cartJsonData\" : \"\",\r\n        \"CouponCode\" : \"\" ,\r\n        \"paymentToken\": \"\",\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/common/post-order/post-customer-order",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"common",
+						"post-order",
+						"post-customer-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get States_Provinces List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"CountryId\": 1 ,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-states-provinces-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-states-provinces-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cities List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"StateProvinceId\": 1,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-cities-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-cities-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Countries List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-countries-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-countries-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tags List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 1,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-popular-tags",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-popular-tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Manufacturer List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 1,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-manufacturer-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-manufacturer-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Reviews",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"ProductId\": 39,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-product-reviews",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-product-reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Subscriber",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"SubscriberEmail\": \"rahimul.din@gmail.com\"\r\n        \r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/insert-subscriber",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"insert-subscriber"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "UserID",
+						"value": "13",
+						"type": "default"
+					},
+					{
+						"key": "Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEzIiwibmJmIjoxNjYzMzM0ODExLCJleHAiOjE2NjMzMzUxMTEsImlhdCI6MTY2MzMzNDgxMSwiaXNzIjoiaHR0cHM6Ly9hcGlzb2x1dGlvbi5pbnN0YWtpbi5jb20vIn0.5MXiYXEdd15D7FT4iQTuIo5YhgFbcrtv4PzmR6nz8vo",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"Email\": \"Haris@gmail.com\",\r\n        \"Password\": \"123456\"\r\n        \r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-user-login",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-user-login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Us",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"FullName\": \"khalid maqbool\",\r\n        \"Email\": \"khalid.maqbool@gmail.com\",\r\n        \"PhoneNumber\": \"03433219800\",\r\n        \"Subject\": \"just want enquiery\",\r\n        \"Message\": \"Just want info\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/contact-us",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"contact-us"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"FirstName\": \"Kalim\",\r\n    \"LastName\": \"Rohan\",\r\n    \"EmailAddress\": \"rohan.shahzad@gmail.com\",\r\n    \"Password\": \"12345\",\r\n    \"MobileNo\": \"123453584\",\r\n    \"AddressLineOne\": \"Saddar Karachi\",\r\n    \"CityId\": \"-999\",\r\n    \"PostalCode\": \"6441564\",\r\n    \"StateProvinceId\" : \"-999\",\r\n    \"CountryID\": \"1\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/signup-user",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"signup-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Email Send OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"Email\": \"kalim@gmail.com\"\r\n    \r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/common/validate-email-send-otp",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"common",
+						"validate-email-send-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate OTP Change Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"Email\": \"kalim@gmail.com\",\r\n    \"Otp\": \"12354\" ,\r\n    \"Password\": \"555555\",\r\n    \"ConfirmPassword\": \"555555\"\r\n    \r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/common/validate-otp-change-password",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"common",
+						"validate-otp-change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Product Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"ProductId\": 39,\r\n    \"ReviewerName\": \"Mushtaq Ali\",\r\n    \"ReviewerEmail\": \"mushtaq.ali@gmail.com\",\r\n    \"ReviewTitle\": \"Just testing\",\r\n    \"ReviewBody\": \"Hey. you product is fine\",\r\n    \"ReviewRating\": 3\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/insert-product-review",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"insert-product-review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Colors List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 1,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-colors-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-colors-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Payment Methods",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 10,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-payment-methods",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-payment-methods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 2,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-categories-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-categories-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Popular Categories",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n       \r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-popular-categories",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-popular-categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Related Products List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"ProductId\" : 39 ,\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 100,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-related-products-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-related-products-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Popular Products List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 10,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-popular-products-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-popular-products-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Recent Products List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"PageNo\": 1,\r\n        \"PageSize\": 100,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-recents-products-list",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-recents-products-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products List By Product IDs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"ProductsIds\": \"[{'ProductId':1},{'ProductId':2}]\",\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-products-list-by-ids",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-products-list-by-ids"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Detail By ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"ProductId\": 100,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-product_detail",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-product_detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestParameters\": {\r\n    \"SearchTerm\": \"\",\r\n    \"SizeID\": null,\r\n    \"ColorID\": null,\r\n    \"CategoryID\": null,\r\n    \"TagID\": null,\r\n    \"ManufacturerID\": null,\r\n    \"MinPrice\": null,\r\n    \"MaxPrice\": null,\r\n    \"Rating\": null,\r\n    \"OrderByColumnName\": 0,\r\n    \"PageNo\": 67,\r\n    \"PageSize\": 5,\r\n    \"recordValueJson\": \"[]\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-all-products",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-all-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product All Attributes By Product Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"requestParameters\":{\r\n        \"ProductId\": 45,\r\n        \"recordValueJson\": \"[]\"\r\n    }\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Api_Domain_Url}}api/v1/dynamic/dataoperation/get-product-all-attributes-by-productId",
+					"host": [
+						"{{Api_Domain_Url}}api"
+					],
+					"path": [
+						"v1",
+						"dynamic",
+						"dataoperation",
+						"get-product-all-attributes-by-productId"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

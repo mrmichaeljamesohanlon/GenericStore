@@ -1,0 +1,97 @@
+﻿@model Entities.MainModels.UserManagementModel
+
+
+@await Html.PartialAsync("~/Views/Common/_DataTableLength.cshtml")
+
+<table class="table site-table-listing">
+    <thead>
+        <tr>
+            <th id="lbl_hdr_addresTypeId"> Address Type ID</th>
+            <th id="lbl_hdr_addresTypeName">  Address Type Name</th>
+ 
+            <th id="lbl_hdr_addresStatus"> Status</th>
+            <th id="lbl_hdr_addresDisSeqNo"> Display Seq No</th>
+            <th id="lbl_hdr_addressCreatedOn"> Created On</th>
+
+
+          
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null && Model.AddressTypeList != null && Model.AddressTypeList.Count > 0)
+            {
+                foreach (var item in Model.AddressTypeList)
+                {
+                    <tr>
+                        <td><span class="text-dark">@item.AddressTypeId</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="text-default font-weight-semibold">@item.AddressTypeName</a>
+
+                                </div>
+                            </div>
+                        </td>
+                      
+
+                        @if (item.IsActive != null && item.IsActive == false)
+                        {
+                            <td><span class="badge bg-blue">Not Active</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge bg-success-400">Active</span></td>
+                        }
+
+                            <td><span class="text-dark">@(item.DisplaySeqNo)</span></td>
+                        <td><span class="text-dark">@(item.CreatedOn.ToString("dd MMM, yyyy"))</span></td>
+                    
+
+
+                      
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="20"><b>  No record found </b></td>
+
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>
+
+
+
+<div class="row" id="pagination_div">
+
+    @{
+        if (Model != null && Model.pageHelperObj != null)
+        {
+            PagerHelper ph = new PagerHelper();
+            ph.CurrentPage = Model.pageHelperObj.CurrentPage;
+            ph.TotalRecords = Model.pageHelperObj.TotalRecords;
+            ph.RecordsPerPage = Model.pageHelperObj.RecordsPerPage;
+            ph.EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0;
+            ph.PageUrl = Url.Action("AddressTypesList", "StateProvinceList", new { langCode = Model?.PageBasicInfoObj?.langCode });
+
+            ph.AjaxEnabled = true;
+            ph.OnClientClickAjaxCall = "PaginationAfterAjax(this)";
+
+            @await Html.PartialAsync("~/Views/Common/_Pager.cshtml", ph)
+        }
+
+    }
+
+
+</div>
+
+

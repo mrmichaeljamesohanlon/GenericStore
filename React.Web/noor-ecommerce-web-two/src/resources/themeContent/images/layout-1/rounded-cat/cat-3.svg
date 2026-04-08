@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg3c" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0a0a1a"/>
+    </radialGradient>
+    <linearGradient id="pipe3c" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D0D0D0"/>
+      <stop offset="50%" stop-color="#9E9E9E"/>
+      <stop offset="100%" stop-color="#616161"/>
+    </linearGradient>
+    <linearGradient id="tip3c" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BDBDBD"/>
+      <stop offset="100%" stop-color="#424242"/>
+    </linearGradient>
+    <radialGradient id="glow3c" cx="80%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#FF6B35" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg3c)"/>
+  <!-- Heat glow from exhaust tip -->
+  <ellipse cx="162" cy="100" rx="48" ry="38" fill="url(#glow3c)"/>
+  <!-- Exhaust pipe body (silver/chrome) -->
+  <rect x="25" y="87" width="120" height="26" rx="13" fill="url(#pipe3c)" stroke="#424242" stroke-width="1.5"/>
+  <!-- Pipe highlight (chrome shine) -->
+  <rect x="28" y="90" width="112" height="6" rx="3" fill="white" opacity="0.25"/>
+  <!-- Heat wrap bands (diagonal tape) -->
+  <line x1="42"  y1="87" x2="37"  y2="113" stroke="#FF8C00" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+  <line x1="57"  y1="87" x2="52"  y2="113" stroke="#FFD700" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+  <line x1="72"  y1="87" x2="67"  y2="113" stroke="#FF8C00" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+  <line x1="87"  y1="87" x2="82"  y2="113" stroke="#FFD700" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+  <line x1="102" y1="87" x2="97"  y2="113" stroke="#FF8C00" stroke-width="5" stroke-linecap="round" opacity="0.95"/>
+  <!-- Exhaust tip -->
+  <ellipse cx="157" cy="100" rx="16" ry="20" fill="url(#tip3c)" stroke="#212121" stroke-width="2.5"/>
+  <ellipse cx="157" cy="100" rx="9"  ry="12" fill="#111111"/>
+  <!-- Heat shimmer -->
+  <ellipse cx="176" cy="88" rx="7" ry="5" fill="#FF6B35" opacity="0.5"/>
+  <ellipse cx="184" cy="76" rx="6" ry="4" fill="#FF8C00" opacity="0.35"/>
+  <ellipse cx="179" cy="112" rx="6" ry="4" fill="#FF6B35" opacity="0.4"/>
+</svg>

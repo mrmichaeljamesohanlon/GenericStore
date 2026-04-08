@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F06292"/>
+      <stop offset="100%" stop-color="#4A0020"/>
+    </linearGradient>
+    <linearGradient id="spark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="12" fill="url(#bg8)"/>
+  <!-- Spark plug body (hexagonal nut) -->
+  <polygon points="150,50 175,65 175,95 150,110 125,95 125,65" fill="#888" stroke="#FFE082" stroke-width="3"/>
+  <polygon points="150,58 170,70 170,92 150,104 130,92 130,70" fill="#555"/>
+  <!-- Threaded body -->
+  <rect x="138" y="110" width="24" height="50" rx="4" fill="#999"/>
+  <line x1="138" y1="118" x2="162" y2="118" stroke="#777" stroke-width="2"/>
+  <line x1="138" y1="126" x2="162" y2="126" stroke="#777" stroke-width="2"/>
+  <line x1="138" y1="134" x2="162" y2="134" stroke="#777" stroke-width="2"/>
+  <line x1="138" y1="142" x2="162" y2="142" stroke="#777" stroke-width="2"/>
+  <!-- Electrode tip -->
+  <rect x="144" y="160" width="12" height="18" rx="6" fill="#ccc"/>
+  <!-- Spark gap electric arc -->
+  <path d="M150,178 L142,190 L154,185 L148,198" fill="none" stroke="url(#spark)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top terminal -->
+  <circle cx="150" cy="44" r="9" fill="#FFE082"/>
+  <rect x="146" y="18" width="8" height="28" rx="4" fill="#FFE082"/>
+</svg>

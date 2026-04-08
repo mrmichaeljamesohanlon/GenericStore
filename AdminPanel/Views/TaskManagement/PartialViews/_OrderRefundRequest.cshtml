@@ -1,0 +1,231 @@
+﻿@model Entities.MainModels.TasksManagementModel
+
+<!--request header area-->
+@await Html.PartialAsync("~/Views/TaskManagement/PartialViews/_RequestModalHeader.cshtml", Model)
+
+<!--request body area-->
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card border-left-3 border-left-slate">
+            <div class="card-header header-elements-inline">
+                <h6 class="card-title" id="lbl_vndor_sub_title">@(Model?.PageBasicInfoObj?.PageTitle ?? "Page Info")</h6>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        @* <a class="list-icons-item" data-action="collapse"></a>*@
+                        @*  <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-tabs-highlight mb-0">
+                    <li class="nav-item"><a href="#request-overview-info-tab" class="nav-link active" data-toggle="tab"><i class="icon-user mr-2"></i><span id="lbl_vndor_request_overview"> Overview</span></a></li>
+                    <li class="nav-item"><a href="#request-detail-info-tab" class="nav-link" data-toggle="tab"><i class="icon-address-book mr-2"></i> <span id="lbl_vndor_request_detail">Detail</span></a></li>
+
+
+                </ul>
+
+                <div class="tab-content card card-body border-top-0 rounded-top-0 mb-0">
+                    <div class="tab-pane fade show active" id="request-overview-info-tab">
+                        <fieldset class="mb-3">
+
+
+
+
+
+                            <div class="form-group row">
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_orderid"> Order Id</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderIdRefund" name="OrderIdRefund" value="@(Model?.OrderRefundRequestObj?.OrderId)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_amount">Order Amount</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderAmountRefund" name="OrderAmountRefund" value="@(Model?.OrderRefundRequestObj?.RefundAmount)" placeholder="" disabled>
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_reasontyp"> Reason Type</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderTypeRefund" name="OrderTypeRefund" value="@(Model?.OrderRefundRequestObj?.ReasonName)" placeholder="" disabled>
+
+
+                                </div>
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_refundtype"> Refund Type</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderTypeRefund" name="OrderTypeRefund" value="@(Model?.OrderRefundRequestObj?.IsFullRefund == true ? "Full Refund" : "Partially Refund")" placeholder="" disabled>
+
+
+                                </div>
+
+
+
+                                <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_reasondetail">Order Reason Detail</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderReasonDetailRefund" name="OrderReasonDetailRefund" value="@(Model?.OrderRefundRequestObj?.RefundReasonDesc)" placeholder="" disabled>
+
+                                </div>
+
+                                  <div class="col-sm-12 col-lg-4 col-md-4">
+
+                                    <label>
+                                        <span id="lbl_ordrfnd_pymentmethod">Payment Method</span>
+
+
+                                    </label>
+
+                                    <input type="text" class="form-control" id="OrderPaymentMethod" name="OrderPaymentMethod" value="@(Model?.OrderRefundRequestObj?.PaymentMethodName)" placeholder="" disabled>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </fieldset>
+                    </div>
+
+                    <div class="tab-pane fade" id="request-detail-info-tab">
+                        <fieldset class="mb-3">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <h6 class="mb-2 mt-2 font-weight-semibold"> <span id="lbl_refund_orderitems">Order Items</span></h6>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="table-responsive" id="product_attribute_data_table">
+                                        <table class="table site-table-listing" id="product_attributes_table">
+                                            <thead>
+                                                <tr>
+                                                    <th id="lbl_hdr_orderItemId"> Order Item ID</th>
+                                                    <th id="lbl_hdr_orderPrdImg"> Product Image</th>
+                                                    <th id="lbl_hdr_orderProduct"> Product</th>
+                                                    <th id="lbl_hdr_orderVendorName"> Vendor Name</th>
+                                                    <th id="lbl_hdr_orderPrice">Price </th>
+                                                    <th id="lbl_hdr_orderQuantity">Quantity</th>
+
+                                                    <th id="lbl_hdr_orderItemTotal">Order Item Total</th>
+                                               
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    var OrderItemsList = JsonConvert.DeserializeObject<List<OrderItemEntity>>(Model?.OrderObj?.OrdersItemsJson ?? "[]");
+
+                                                    if (OrderItemsList != null && OrderItemsList.Count() > 0)
+                                                    {
+                                                        foreach (var item in OrderItemsList)
+                                                        {
+                                                            string VendorFirstName = String.IsNullOrWhiteSpace(item.VendorFirstName) ? "" : item.VendorFirstName;
+                                                            string VendorLastName = String.IsNullOrWhiteSpace(item.VendorLastName) ? "" : item.VendorLastName;
+                                                            string VendorFullName = VendorFirstName + " " + VendorLastName;
+                                                            <tr>
+                                                                <td>
+
+                                                                    @item.OrderItemId
+                                                                </td>
+                                                                <td>
+                                                                    @{
+                                                                        string ImagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + item.ProductDefaultImage);
+
+                                                                        if (System.IO.File.Exists(ImagePath))
+                                                                        {
+
+                                                                            <a href="@item.ProductDefaultImage" target="_blank">
+                                                                                <img src="@item.ProductDefaultImage" class="" width="100" height="100" alt="">
+                                                                            </a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" target="_blank">
+                                                                                <img src="/content/themeContent/global_assets/images/placeholders/placeholder.jpg" class="" width="100" height="100" alt="">
+                                                                            </a>
+                                                                        }
+                                                                    }
+                                                                </td>
+
+                                                                <td>
+                                                                    <a href="@Url.Action("UpdateProduct","ProductsCatalog", new {langCode = Model?.PageBasicInfoObj?.langCode, ProductId=item.ProductId})">
+                                                                        <span class="text-dark"> @(StringConversionHelper.TruncateAnyStringValue(@item.ProductName, 20, true))   </span>
+                                                                    </a>
+
+                                                                </td>
+                                                                <td>@VendorFullName</td>
+                                                                <td>@(CommonConversionHelper.GetDefaultCurrencySymbol())@item.Price</td>
+                                                                <td>@item.Quantity</td>
+
+                                                                <td><span class="text-dark"> @item.OrderItemTotal   </span></td>
+
+                                                               
+
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr id="product_attribute_no_data_row">
+                                                            <td class="text-center" colspan="20"><b>  No record found </b></td>
+
+                                                        </tr>
+                                                    }
+                                                }
+
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#0A1E0B"/>
+    </linearGradient>
+    <linearGradient id="wrench" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#388E3C"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="12" fill="url(#bg6)"/>
+  <!-- Wrench -->
+  <rect x="140" y="25" width="22" height="150" rx="11" fill="url(#wrench)"/>
+  <path d="M116,35 Q150,8 184,35 Q168,58 150,55 Q132,58 116,35Z" fill="url(#wrench)"/>
+  <ellipse cx="150" cy="40" rx="17" ry="12" fill="url(#bg6)"/>
+  <path d="M116,168 Q150,192 184,168 Q168,145 150,148 Q132,145 116,168Z" fill="url(#wrench)"/>
+  <ellipse cx="150" cy="163" rx="17" ry="12" fill="url(#bg6)"/>
+  <!-- Grip lines -->
+  <line x1="138" y1="88" x2="162" y2="88" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+  <line x1="138" y1="100" x2="162" y2="100" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+  <line x1="138" y1="112" x2="162" y2="112" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,17 @@
+@import "theme/variables";
+@import "theme/style";
+@import "theme/menu";
+@import "theme/responsive";
+@import "theme/theme-dark";
+@import "theme/theme-rtl";
+
+
+:root {
+  --theme-color1: #FFD600; /* yellow */
+  --theme-color2: #000000; /* black */
+}
+
+html[class^="color-"] {
+  --theme-color1: #FFD600; /* yellow */
+  --theme-color2: #000000; /* black */
+}

@@ -1,0 +1,183 @@
+﻿@model Entities.MainModels.SalesModel
+
+
+<div class="col-lg-12">
+    <div class=" dropdown-menu-right dropdown-content wmin-md-350">
+
+
+        <div class="dropdown-content-body dropdown-scrollable" id="order_note_message_area">
+
+            @await Html.PartialAsync("~/Views/Sales/PartialViews/_OrderNoteMessages.cshtml", Model)
+        </div>
+
+
+    </div>
+
+    <div class="form-group">
+        <textarea name="enter-message" class="form-control mb-3" rows="3" cols="1" placeholder="Enter your message..." id="MessageParentReply"></textarea>
+
+    </div>
+    <div class="d-flex align-items-center">
+
+
+        <button type="button" class="btn bg-teal-400 btn-labeled btn-labeled-right ml-auto" onclick="SaveOrderNoteMessage('ParentReply')"><b><i class="icon-paperplane"></i></b> Send</button>
+    </div>
+</div>
+
+
+<!-- Modals area Insert starts here-->
+@{
+    HtmlBootstrapModalEntity htmlBootstrapModalEntityInsert = new HtmlBootstrapModalEntity();
+
+    htmlBootstrapModalEntityInsert.ModalTitle = "Reply";
+    htmlBootstrapModalEntityInsert.ModalDivId = "OrderNoteReplyModal";
+    htmlBootstrapModalEntityInsert.SubmitBtnJsFunctionName = "SaveOrderNoteMessage('ChildReply');";
+    htmlBootstrapModalEntityInsert.SubmitButtonText = "Submit Reply";
+    htmlBootstrapModalEntityInsert.FormId = "data-insert-common-form";
+    htmlBootstrapModalEntityInsert.ModalSizeType = (short)HtmlBootsrapModalTypes.Medium;
+
+
+
+    htmlBootstrapModalEntityInsert.htmlFormFieldsEntities = new List<HtmlFormFieldsEntity>()
+    {
+    new HtmlFormFieldsEntity(){ FieldID = "MessageChildReply", FieldName="MessageChildReply",  FieldTypeID = (short)HTMLFieldTypeEnums.Text, PlaceHolderText="Reply", LabelText="Note Reply", IsRequired=true , GridColumnClass = "col-sm-12 col-lg-12 col-md-12" },
+    new HtmlFormFieldsEntity(){ FieldID = "OrderNoteIdReply", FieldName="OrderNoteIdReply",  FieldTypeID = (short)HTMLFieldTypeEnums.Hidden},
+    };
+}
+
+@await Html.PartialAsync("~/Views/Common/_BootstrapFormModal.cshtml", htmlBootstrapModalEntityInsert)
+
+<!-- /Modals area Insert ends here-->
+
+
+
+<script>
+
+    function showReplyModel(OrderNoteId) {
+        debugger
+        event.preventDefault();
+
+        //--first empty fields
+        $('#MessageChildReply').val("");
+        $('#OrderNoteIdReply').val("");
+
+        $('#OrderNoteIdReply').val(OrderNoteId);
+
+
+        $('#OrderNoteReplyModal').modal('show');
+
+    }
+
+    function SaveOrderNoteMessage(replyType) {
+        event.preventDefault();
+        debugger
+
+        let OrderId = $('#OrderId').val();
+
+        let OrderNoteId = "";
+        let Message = "";
+        if (replyType == 'ChildReply') {
+            Message = $('#MessageChildReply').val();
+            OrderNoteId = $('#OrderNoteIdReply').val();
+        }
+        else if (replyType == 'ParentReply') {
+            Message = $('#MessageParentReply').val();
+        }
+
+        if (!checkIfStringIsEmtpy(OrderId)) {
+            showSuccessErrorMsg("error", "Error", "Order id is null!");
+            return false;
+        }
+
+        if (!checkIfStringIsEmtpy(Message)) {
+            showSuccessErrorMsg("error", "Error", "Messag note is required!");
+            return false;
+        }
+
+
+        let formData = new FormData();
+        formData.append("OrderId", OrderId);
+        formData.append("OrderNoteId", OrderNoteId);
+        formData.append("Message", Message);
+
+
+
+
+        let saveUrl = "@Url.Action("SaveOrderNoteReply", "Sales" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+
+        $.ajax({
+            type: "POST",
+            url: saveUrl,
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: formData,
+            success: function(data) {
+
+                if (data.success) {
+                    showSuccessErrorMsg("success", "Success", "Submitted Successfully!");
+
+                    setTimeout(function() {
+                        GetLatestOrderNoteMessages(OrderId);
+                    }, 300);
+
+                    if (replyType == 'ChildReply') {
+                        $('#OrderNoteReplyModal').modal('hide');
+                    } else if (replyType == 'ParentReply') {
+                        $('#MessageParentReply').val("");
+                    }
+
+                }
+                else {
+
+                    showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                }
+            },
+            error: function(xhr, status, error) {
+                showSuccessErrorMsg("error", "Error", "Something went wrong. Please try again");
+            }
+        });
+    }
+
+
+    function GetLatestOrderNoteMessages(OrderId) {
+
+
+        if (!checkIfStringIsEmtpy(OrderId)) {
+            return false;
+        }
+
+
+        let noteGetDate = new FormData();
+
+
+        let getUrl = "@Url.Action("GetLatestOrderNoteMessages", "Sales" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+
+        noteGetDate = {
+            OrderId: OrderId
+        }
+
+        $.ajax({
+            type: "GET",
+            url: getUrl,
+            data: noteGetDate,
+            // datatype: "json",
+            cache: false,
+            async: false,
+
+
+            success: function(data) {
+                debugger
+                if (data != undefined) {
+                    $('#order_note_message_area').html(data);
+                }
+
+            },
+            error: function(xhr, status, error) {
+                showSuccessErrorMsg("error", "Error", "Something went wrong. Please try again");
+            }
+        });
+    }
+
+</script>
+

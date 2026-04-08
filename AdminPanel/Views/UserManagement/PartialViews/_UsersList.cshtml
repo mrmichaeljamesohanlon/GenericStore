@@ -1,0 +1,144 @@
+﻿@model Entities.MainModels.UserManagementModel
+
+
+@{
+    bool hasUpdateRecordRight = true;
+
+    if (Model != null && Model.PageBasicInfoObj != null && Model.PageBasicInfoObj.EntityId > 0)
+    {
+        List<RoleRightEntity>? UserRolesRights = sessionManager != null ? await sessionManager.GetUserRoleRightsFromSession() : new List<RoleRightEntity>();
+        hasUpdateRecordRight = UserRolesRights != null && UserRolesRights.Count > 0 && UserRolesRights.Any(x => x.EntityId == Model?.PageBasicInfoObj?.EntityId && x.RightId == (short)UserRightsEnum.Update) ? true : false;
+    }
+
+}
+
+@await Html.PartialAsync("~/Views/Common/_DataTableLength.cshtml")
+
+<table class="table site-table-listing">
+    <thead>
+        <tr>
+            <th id="lbl_hdr_usrId"> User ID</th>
+            <th id="lbl_hdr_usrfullName"> Full Name</th>
+            <th id="lbl_hdr_usrName"> User Name</th>
+            <th id="lbl_hdr_usrEmail"> Email</th>
+            <th id="lbl_hdr_usrType"> User Type</th>
+            <th id="lbl_hdr_usrActive"> Is Active</th>
+            <th id="lbl_hdr_usrCreaetedOn"> Created On</th>
+
+
+            <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{
+            if (Model != null && Model.UsersList != null && Model.UsersList.Count > 0)
+            {
+                foreach (var item in Model.UsersList)
+                {
+                    string FirstName = !String.IsNullOrWhiteSpace(item.FirstName) ? item.FirstName : ""; 
+                    string LastName = !String.IsNullOrWhiteSpace(item.LastName) ? item.LastName : "";
+                    string FullName = FirstName + " " + LastName;
+                    <tr>
+                        <td><span class="text-dark">@item.UserId</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="text-default font-weight-semibold">@FullName</a>
+
+                                </div>
+                            </div>
+                        </td>
+                      
+                         <td><span class="text-dark">@(item.UserName)</span></td>
+                          <td><a href="#">@(item.EmailAddress)</a></td>
+                      
+                         <td><span class="text-dark">@(item.UserTypeName)</span></td>
+
+                        @if (item.IsActive == false)
+                        {
+                            <td><span class="badge bg-blue">Not Active</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge bg-success-400">Active</span></td>
+                        }
+
+
+                        <td><span class="text-dark">@(item.CreatedOn.ToString("dd MMM, yyyy"))</span></td>
+
+
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        @if (hasUpdateRecordRight)
+                                        {
+                                            <a href="@Url.Action("UpdateUser","UserManagement", new { langCode = Model?.PageBasicInfoObj?.langCode ,   UserId = item.UserId})" class="dropdown-item text-indigo-600"><i class="icon-database-edit2"></i>Edit</a>
+                                        }
+                                      
+                                        @{
+                                            ListingDeleteButton pageDeleteButton = new ListingDeleteButton
+                                            {
+                                                EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0,
+                                                primaryKeyColumn = "UserId",
+                                                primarykeyValue = item.UserId.ToString(),
+                                                tableName = "Users",
+                                                SqlDeleteType = (short)SqlDeleteTypes.ForeignKeyDelete,
+                                            };
+                                        }
+                                        @await Html.PartialAsync("~/Views/Common/_ListingDeleteButton.cshtml", pageDeleteButton)
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="20"><b>  No record found </b></td>
+
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>
+
+
+
+<div class="row" id="pagination_div">
+
+    @{
+        if (Model != null && Model.pageHelperObj != null)
+        {
+            PagerHelper ph = new PagerHelper();
+            ph.CurrentPage = Model.pageHelperObj.CurrentPage;
+            ph.TotalRecords = Model.pageHelperObj.TotalRecords;
+            ph.RecordsPerPage = Model.pageHelperObj.RecordsPerPage;
+            ph.EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0;
+            ph.PageUrl = Url.Action("UsersList", "UserManagement", new { langCode = Model?.PageBasicInfoObj?.langCode });
+
+            ph.AjaxEnabled = true;
+            ph.OnClientClickAjaxCall = "PaginationAfterAjax(this)";
+
+            @await Html.PartialAsync("~/Views/Common/_Pager.cshtml", ph)
+        }
+
+    }
+
+
+</div>
+
+

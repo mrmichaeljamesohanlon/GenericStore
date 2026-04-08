@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+**/bin/
+**/obj/
+
+# Node
+**/node_modules/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large archives
+React.Web/noor-ecommerce-web-two.zip
+React.Web/noor-ecommerce-web-two/build/
+React.Web/noor-ecommerce-web/build/

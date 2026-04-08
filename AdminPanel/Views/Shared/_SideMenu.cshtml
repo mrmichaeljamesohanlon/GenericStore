@@ -1,0 +1,223 @@
+﻿@{
+    //---Get Main Menu from session
+    var mainmenu = sessonContext != null && sessonContext.HttpContext != null ? sessonContext.HttpContext.Session.GetString("MainMenu") : null;
+
+    List<MenuNavigation>? MainMenuList = new List<MenuNavigation>();
+    if (!String.IsNullOrEmpty(mainmenu))
+    {
+        MainMenuList = JsonConvert.DeserializeObject<List<MenuNavigation>>(mainmenu);
+    }
+    else
+    {
+        MainMenuList = null;
+    }
+
+
+    //---Get user role rights from session
+    var UserRoleRightsString = sessonContext != null && sessonContext.HttpContext != null ? sessonContext.HttpContext.Session.GetString("UserRoleRights") : null;
+
+    List<RoleRightEntity>? RoleRighstList = new List<RoleRightEntity>();
+    if (!String.IsNullOrEmpty(UserRoleRightsString))
+    {
+        RoleRighstList = JsonConvert.DeserializeObject<List<RoleRightEntity>>(UserRoleRightsString);
+    }
+    else
+    {
+        RoleRighstList = new List<RoleRightEntity>();
+    }
+
+
+
+    //--check if roles rigts enables
+    int RoleRightsEnables = 0;
+    try
+    {
+        RoleRightsEnables = Convert.ToInt32(configuration.GetSection("AppSetting").GetSection("RoleRightsEnables").Value);
+    }
+    catch
+    {
+        RoleRightsEnables = 0;
+    }
+
+    //-- Get Language code from session
+    string langCode = await sessionManager.GetLanguageCodeFromSession();
+    if (String.IsNullOrWhiteSpace(langCode))
+    {
+        langCode = "en"; //-- set en as language if its null in session
+    }
+
+}
+
+
+
+
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+
+    <!-- Sidebar mobile toggler -->
+    <div class="sidebar-mobile-toggler text-center">
+        <a href="#" class="sidebar-mobile-main-toggle">
+            <i class="icon-arrow-left8"></i>
+        </a>
+        Navigation
+        <a href="#" class="sidebar-mobile-expand">
+            <i class="icon-screen-full"></i>
+            <i class="icon-screen-normal"></i>
+        </a>
+    </div>
+    <!-- /sidebar mobile toggler -->
+    <!-- Sidebar content -->
+    <div class="sidebar-content">
+
+
+        <!-- Main navigation -->
+        <div class="card card-sidebar-mobile">
+            <ul class="nav nav-sidebar" data-nav-type="accordion">
+
+
+                @{
+                    if (MainMenuList != null && MainMenuList.Count() > 0 && (RoleRightsEnables == 0 || (RoleRighstList != null && RoleRighstList.Count > 0)))
+                    {
+                        string MainMenuIcon = "";
+                        string MainMenuUrl = "#!";
+
+                        //--QueryParams to be replaced in url
+                        Dictionary<string, string> QueryParams = new Dictionary<string, string>();
+                        QueryParams.Add("langCode", langCode);
+
+                        //-- EntityIds to hide from the LHS menu
+                        int[] hiddenEntityIds = new int[] { (int)EntitiesEnum.Notifications, (int)EntitiesEnum.Admin_Notifications, (int)EntitiesEnum.TasksManagement };
+
+                        foreach (var parentItem in MainMenuList.Where(p => p.ParentMenuNavigationId == null || p.ParentMenuNavigationId < 1).ToList())
+                        {
+                            //-- Skip hidden menu items
+                            if (parentItem.EntityId.HasValue && hiddenEntityIds.Contains(parentItem.EntityId.Value))
+                            {
+                                continue;
+                            }
+                            MainMenuIcon = String.IsNullOrWhiteSpace(parentItem.IconClass) ? "icon-home4" : parentItem.IconClass;
+                            MainMenuUrl = String.IsNullOrWhiteSpace(parentItem.LinkUrl) ? "#!" : parentItem.LinkUrl;
+
+                            string navItemClass = MainMenuList != null && MainMenuList.Count() > 0 && MainMenuList.Any(sub => sub.ParentMenuNavigationId == parentItem.MenuNavigationId) ? "nav-item nav-item-submenu" : "nav-item";
+
+                            //--get right id against login user for the entity id in foreach loop of parent menus
+                            if (RoleRighstList != null && RoleRighstList.Count > 0)
+                            {
+                                bool IsExistsParent = RoleRighstList.Any(e => e.EntityId == parentItem.EntityId && (e.RightId == (short)UserRightsEnum.View_All || e.RightId == (short)UserRightsEnum.View_Self));
+                                if (!IsExistsParent && RoleRightsEnables == 1) //--if not exists
+                                {
+                                    continue;
+                                }
+
+                            }
+                            else
+                            {
+                                if (RoleRightsEnables == 1)
+                                {
+                                    continue;
+                                }
+
+                            }
+
+
+
+
+                            <li class="@navItemClass">
+                                @if (parentItem.MenuNavigationName.Contains("Dashboard"))
+                                {
+                                    parentItem.MenuNavigationName = UrlHelper.GetMenuLocalizationName(parentItem.MenuNavigationName, parentItem.LocalizationJsonData, langCode);
+
+                                    <a href="@MainMenuUrl" onclick="redirectToHomePage()" class="nav-link">
+                                        <i class="@MainMenuIcon"></i><span>@parentItem.MenuNavigationName</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    parentItem.MenuNavigationName = UrlHelper.GetMenuLocalizationName(parentItem.MenuNavigationName, parentItem.LocalizationJsonData, langCode);
+
+                                    <a href="@MainMenuUrl" class="nav-link">
+                                        <i class="@MainMenuIcon"></i><span>@parentItem.MenuNavigationName</span>
+                                    </a>
+                                }
+
+
+                                @{
+                                    if (MainMenuList != null && MainMenuList.Count() > 0 && MainMenuList.Any(sub => sub.ParentMenuNavigationId == parentItem.ParentMenuNavigationId))
+                                    {
+                                        string SubMenuIcon = "";
+                                        string SubMenuUrl = "#!";
+                                        <ul class="nav nav-group-sub" data-submenu-title="Menu levels">
+                                            @foreach (var sub in MainMenuList.Where(sub => sub.ParentMenuNavigationId == parentItem.MenuNavigationId).ToList())
+                                            {
+                                                //-- Skip hidden menu items
+                                                if (sub.EntityId.HasValue && hiddenEntityIds.Contains(sub.EntityId.Value))
+                                                {
+                                                    continue;
+                                                }
+
+                                                SubMenuIcon = String.IsNullOrWhiteSpace(sub.IconClass) ? "icon-IE" : sub.IconClass;
+                                                SubMenuUrl = String.IsNullOrWhiteSpace(sub.LinkUrl) ? "#!" : sub.LinkUrl;
+
+                                                SubMenuUrl = UrlHelper.ReplaceQueryParamsInUrl(SubMenuUrl, QueryParams);
+                                                sub.MenuNavigationName = UrlHelper.GetMenuLocalizationName(sub.MenuNavigationName, sub.LocalizationJsonData, langCode);
+
+
+                                                //--get right id against login user for the entity id in foreach loop of parent menus
+                                                if (RoleRighstList != null && RoleRighstList.Count > 0)
+                                                {
+                                                    bool IsExistsChild = RoleRighstList.Any(e => e.EntityId == sub.EntityId && (e.RightId == (short)UserRightsEnum.View_All || e.RightId == (short)UserRightsEnum.View_Self)); //--RightID=1 is for View_All
+                                                    if (!IsExistsChild && RoleRightsEnables == 1) //--if not exists
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (RoleRightsEnables == 1)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                }
+
+
+
+
+                                                <li class="nav-item">
+                                                    <a href="@SubMenuUrl" class="nav-link">
+                                                        <i class="@SubMenuIcon"></i>@sub.MenuNavigationName
+
+                                                    </a>
+                                                </li>
+
+
+
+
+                                            }
+                                        </ul>
+                                    }
+                                }
+
+
+                            </li>
+                        }
+                    }
+                }
+
+
+
+            </ul>
+        </div>
+        <!-- /main navigation -->
+
+    </div>
+    <!-- /sidebar content -->
+
+</div>
+
+
+<script>
+    function redirectToHomePage() {
+        window.location.href = "/";
+    }
+</script>

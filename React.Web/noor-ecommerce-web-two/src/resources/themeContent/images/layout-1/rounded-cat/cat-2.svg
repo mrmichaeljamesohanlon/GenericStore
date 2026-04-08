@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#7B1F00"/>
+    </radialGradient>
+    <linearGradient id="coil2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg2)"/>
+  <!-- Suspension coil spring -->
+  <path d="M75,40 Q125,40 125,60 Q75,60 75,80 Q125,80 125,100 Q75,100 75,120 Q125,120 125,140 Q75,140 75,160" fill="none" stroke="url(#coil2)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Top plate -->
+  <rect x="60" y="30" width="80" height="14" rx="7" fill="#FFD700"/>
+  <!-- Bottom plate -->
+  <rect x="60" y="158" width="80" height="14" rx="7" fill="#FFD700"/>
+  <!-- Decorative bolt top -->
+  <circle cx="100" cy="37" r="6" fill="#FF4500"/>
+  <!-- Decorative bolt bottom -->
+  <circle cx="100" cy="165" r="6" fill="#FF4500"/>
+</svg>

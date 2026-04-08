@@ -1,0 +1,365 @@
+﻿@model Entities.MainModels.UserManagementModel
+
+@{
+     #region page basic info
+    ViewData["Title"] = Model?.PageBasicInfoObj?.PageTitle ?? "";
+    ViewData["EntityId"] = Model?.PageBasicInfoObj?.EntityId ?? 0;
+     
+    #endregion
+}
+
+@{
+    List<SelectListItem> ActiveInactiveStatus = new List<SelectListItem>();
+    ActiveInactiveStatus.Add(new SelectListItem { Value = "true", Text = "Active" });
+    ActiveInactiveStatus.Add(new SelectListItem { Value = "false", Text = "In Active" });
+
+
+     //--Countries Drop Down
+    Dictionary<string, string>? CountriesListDic = new Dictionary<string, string>();
+    CountriesListDic = Model != null && Model.CountriesList != null && Model.CountriesList.Count > 0 ?
+    Model.CountriesList.ToDictionary(v => v.CountryId.ToString(), t => t.CountryName) : null;
+
+    //--Is Active Drop Down
+     Dictionary<string, string>? IsActiveDropDown = new Dictionary<string, string>();
+     IsActiveDropDown = ActiveInactiveStatus.ToDictionary(v => v.Value, t => t.Text);
+
+}
+
+<!-- Page header -->
+@{
+    PageHeader pageHeader = new PageHeader
+            {
+                EntityId = Model?.PageBasicInfoObj != null ? Model.PageBasicInfoObj.EntityId : 0,
+                PageTitle = Model?.PageBasicInfoObj?.PageTitle ?? "Page Info",
+                ShowAddNewButton = true,
+                ShowActionsButton = true,
+                ShowExportToPdfButton = false,
+                ShowExportToExcelButton = true,
+                DataExportUrl = Url.Action("StateProvinceList", "UserManagement", new { langCode = Model?.PageBasicInfoObj?.langCode })
+            };
+
+}
+@await Html.PartialAsync("~/Views/Common/_PageHeader.cshtml", pageHeader)
+<!-- /page header -->
+
+
+
+<div class="content">
+
+
+    <!-- Error Area -->
+    <div id="error-messages-area">
+         @{
+            SuccessErrorMsgEntity? successErrorMsgEntity = new SuccessErrorMsgEntity();
+            successErrorMsgEntity = Model.SuccessErrorMsgEntityObj == null ? new SuccessErrorMsgEntity() : Model.SuccessErrorMsgEntityObj;
+        }
+            
+        @await Html.PartialAsync("~/Views/Common/_SuccessErrorMsg.cshtml", successErrorMsgEntity)
+    </div>
+    <!-- /Error Area -->
+      <!-- Search Area Starts Here -->
+    <div class="card border-left-3 border-left-slate">
+        <div class="card-header header-elements-inline">
+            @await Html.PartialAsync("~/Views/Common/PartialViews/_PageSearchTitle.cshtml")
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Page search form -->
+            @{
+                SearchFilterModel filter = new SearchFilterModel();
+
+
+                filter.SearchJSFunctionName = "SearchRecord();";
+                filter.SearchButtonType = "button";
+                filter.EntityId = Model?.PageBasicInfoObj?.EntityId ?? 0;
+                filter.SearchURL = Url.Action("StateProvinceList", "UserManagement", new { langCode = Model?.PageBasicInfoObj?.langCode });
+
+
+
+                filter.SearchFilterEntityList = new List<HtmlFormFieldsEntity>()
+            {
+            new HtmlFormFieldsEntity(){ FieldID = "StateName", FieldName="StateName",  FieldTypeID = (short)HTMLFieldTypeEnums.Search, PlaceHolderText="State Name", LabelText="State Name", ToolTipText="Enter here state name", DropdownData=null},
+            new HtmlFormFieldsEntity(){ FieldID = "CountryId", FieldName="CountryId",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, PlaceHolderText="Select Country", LabelText="Country", ToolTipText="Select Country from the drop down", DropdownData=CountriesListDic},
+            new HtmlFormFieldsEntity(){ FieldID = "FromDate", FieldName="FromDate",  FieldTypeID = (short)HTMLFieldTypeEnums.Date, PlaceHolderText="From Date", LabelText="From Date", ToolTipText="Pick a date from where you want to search record", DropdownData=null},
+            new HtmlFormFieldsEntity(){ FieldID = "ToDate", FieldName="ToDate",  FieldTypeID = (short)HTMLFieldTypeEnums.Date, PlaceHolderText="To Date", LabelText="To Date", ToolTipText="Pick a date from where you want to search record", DropdownData=null},
+
+            };
+            }
+
+            @await Html.PartialAsync("~/Views/Common/_SearchFilter.cshtml", filter)
+            <!-- /page search form -->
+
+
+        </div>
+    </div>
+      <!-- Search Area Ends Here -->
+  
+    <div class="card border-left-3 border-left-slate">
+        <div class="card-header header-elements-inline">
+            @await Html.PartialAsync("~/Views/Common/PartialViews/_PageGridTitle.cshtml", Model?.PageBasicInfoObj)
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <div class="table-responsive" id="main_data_table">
+                        @await Html.PartialAsync("~/Views/UserManagement/PartialViews/_StateProvinceList.cshtml", Model)
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+  
+
+
+
+
+    <!-- Modals area Insert starts here-->
+    @{
+        HtmlBootstrapModalEntity htmlBootstrapModalEntityInsert = new HtmlBootstrapModalEntity();
+
+        htmlBootstrapModalEntityInsert.ModalTitle = "Add State";
+        htmlBootstrapModalEntityInsert.ModalDivId = "AddNewDataModal";
+        htmlBootstrapModalEntityInsert.SubmitBtnJsFunctionName = "SaveFormRecord();";
+        htmlBootstrapModalEntityInsert.SubmitButtonText = "Save";
+        htmlBootstrapModalEntityInsert.FormId = "data-insert-common-form";
+        htmlBootstrapModalEntityInsert.ModalSizeType = (short)HtmlBootsrapModalTypes.Medium;
+
+       
+
+        htmlBootstrapModalEntityInsert.htmlFormFieldsEntities = new List<HtmlFormFieldsEntity>()
+    {
+    new HtmlFormFieldsEntity(){ FieldID = "StateNameInsert", FieldName="StateNameInsert",  FieldTypeID = (short)HTMLFieldTypeEnums.Text, PlaceHolderText="State Name", LabelText="State Name", IsRequired=true },
+    new HtmlFormFieldsEntity(){ FieldID = "CountryIdInsert", FieldName="CountryIdInsert",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, PlaceHolderText="Select country", LabelText="Country", IsRequired=true,DropdownSelectType = (short)HtmlDropdownSelectType.Select2 , DropdownData=CountriesListDic},
+    new HtmlFormFieldsEntity(){ FieldID = "IsActiveInsert", FieldName="IsActiveInsert",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, PlaceHolderText="Select Status", LabelText="Is Active", IsRequired=true,DropdownSelectType = (short)HtmlDropdownSelectType.Simple , DropdownData=IsActiveDropDown},
+   
+    };
+    }
+
+    @await Html.PartialAsync("~/Views/Common/_BootstrapFormModal.cshtml", htmlBootstrapModalEntityInsert)
+
+    <!-- /Modals area Insert ends here-->
+
+
+    <!-- Modals area Edit starts here-->
+    @{
+        HtmlBootstrapModalEntity htmlBootstrapModalEntityEdit = new HtmlBootstrapModalEntity();
+
+        htmlBootstrapModalEntityEdit.ModalTitle = "Update State";
+        htmlBootstrapModalEntityEdit.ModalDivId = "EditDataModal";
+        htmlBootstrapModalEntityEdit.SubmitBtnJsFunctionName = "UpdateFormRecord();";
+        htmlBootstrapModalEntityEdit.SubmitButtonText = "Update";
+        htmlBootstrapModalEntityEdit.FormId = "data-edit-common-form";
+        htmlBootstrapModalEntityEdit.ModalSizeType = (short)HtmlBootsrapModalTypes.Medium;
+
+       
+        htmlBootstrapModalEntityEdit.htmlFormFieldsEntities = new List<HtmlFormFieldsEntity>()
+    {
+    new HtmlFormFieldsEntity(){ FieldID = "StateNameUpdate", FieldName="StateNameUpdate",  FieldTypeID = (short)HTMLFieldTypeEnums.Text, PlaceHolderText="State Name", LabelText="State Name", IsRequired=true },
+    new HtmlFormFieldsEntity(){ FieldID = "CountryIdUpdate", FieldName="CountryIdUpdate",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, PlaceHolderText="Select country", LabelText="Country", IsRequired=true,DropdownSelectType = (short)HtmlDropdownSelectType.Select2 , DropdownData=CountriesListDic},
+    new HtmlFormFieldsEntity(){ FieldID = "IsActiveUpdate", FieldName="IsActiveUpdate",  FieldTypeID = (short)HTMLFieldTypeEnums.Dropdown, PlaceHolderText="Select Status", LabelText="Is Active", IsRequired=true,DropdownSelectType = (short)HtmlDropdownSelectType.Simple , DropdownData=IsActiveDropDown},
+   
+    new HtmlFormFieldsEntity(){ FieldID = "StateProvinceIdUpdate", FieldName="StateProvinceIdUpdate",  FieldTypeID = (short)HTMLFieldTypeEnums.Hidden},
+
+    };
+    }
+
+    @await Html.PartialAsync("~/Views/Common/_BootstrapFormModal.cshtml", htmlBootstrapModalEntityEdit)
+
+    <!-- /Modals area Edit ends here-->
+
+
+</div>
+@section  Scripts{
+
+<script>
+
+       function SaveFormRecord(){
+
+          $("#data-insert-common-form").submit(function (e) {
+               e.preventDefault();
+           });
+
+           if (!$("#data-insert-common-form").valid()) {
+                  event.preventDefault();
+               return false;
+           }
+
+
+            let StateName =  $('#StateNameInsert').val();
+            let CountryId =$('#CountryIdInsert').val();
+            let IsActive =$('#IsActiveInsert').val();
+
+          if(!checkIfStringIsEmtpy(StateName)){
+               showSuccessErrorMsg("error", "Error", "Please fill state name!");
+               return false;
+           } 
+           if(!checkIfStringIsEmtpy(CountryId)){
+               showSuccessErrorMsg("error", "Error", "Please fill country!");
+               return false;
+           }
+
+          if(!checkIfStringIsEmtpy(IsActive)){
+               showSuccessErrorMsg("error", "Error", "Please fill status field!");
+               return false;
+           }
+
+
+            //--make form data
+           var formDate = {
+                StateName:StateName,
+                CountryId:CountryId,
+                IsActive:IsActive,
+                DataOperationType: '@((short)DataOperationType.Insert)'
+            }
+
+            let saveUrl = "@Url.Action("SaveUpdateStateProvinceEntity", "UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+             $.ajax({
+                   type: "POST",
+                   url: saveUrl,
+                   data: formDate,
+                   // datatype: "json",
+                   cache: false,
+                   async: false,
+
+                   success: function (data) {
+                        console.log(data);
+                        if (data.success) {
+                        showSuccessErrorMsg("success", "Success", "Saved Successfully!");
+                        setTimeout(function () {
+                          location.reload();
+                        }, 1000);
+                        } else {
+                        showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                        }
+
+                   },
+                   error: function (xhr, ajaxOptions, thrownError) {
+                      showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                   }
+               })
+
+    }
+
+           function UpdateFormRecord(){
+
+               $("#data-edit-common-form").submit(function (e) {
+                    e.preventDefault();
+                });
+
+                if (!$("#data-edit-common-form").valid()) {
+                     event.preventDefault();
+                    return false;
+                }
+
+
+                let StateProvinceId =$('#StateProvinceIdUpdate').val();
+                let StateName =  $('#StateNameUpdate').val();
+                let CountryId =$('#CountryIdUpdate').val();
+                let IsActive =$('#IsActiveUpdate').val();
+
+                if(!checkIfStringIsEmtpy(StateName)){
+                    showSuccessErrorMsg("error", "Error", "Please fill state name!");
+                    return false;
+                } 
+                if(!checkIfStringIsEmtpy(CountryId)){
+                    showSuccessErrorMsg("error", "Error", "Please fill country!");
+                    return false;
+                }
+
+              if(!checkIfStringIsEmtpy(IsActive)){
+                   showSuccessErrorMsg("error", "Error", "Please fill status field!");
+                   return false;
+               }
+
+                if(!checkIfStringIsEmtpy(StateProvinceId)){
+                   showSuccessErrorMsg("error", "Error", "StateId is null!");
+                   return false;
+               }
+
+
+                //--make form data
+               var formDate = {
+                    StateProvinceId:StateProvinceId,
+                    StateName:StateName,
+                    CountryId:CountryId,
+                    IsActive:IsActive,
+                    DataOperationType: '@((short)DataOperationType.Update)'
+                }
+
+
+            let saveUrl = "@Url.Action("SaveUpdateStateProvinceEntity", "UserManagement" , new { langCode = Model?.PageBasicInfoObj?.langCode })";
+                  $.ajax({
+                        type: "POST",
+                        url: saveUrl,
+                        data: formDate,
+                        // datatype: "json",
+                        cache: false,
+                        async: false,
+
+                        success: function (data) {
+                             console.log(data);
+                             if (data.success) {
+                             showSuccessErrorMsg("success", "Success", "Updated Successfully!");
+                             setTimeout(function () {
+                                 location.reload();
+                             }, 1000);
+                             } else {
+
+                             showSuccessErrorMsg("error", "Error", data.message ?? "An error occured. Please try again!");
+                             }
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                         showSuccessErrorMsg("error", "Error", "An error occured. Please try again!");
+                        }
+                    })
+
+         }
+
+      function showEditModal(StateProvinceId , StateName  , CountryId,IsActive  ) {
+
+
+             //--First clear old values
+             $('#StateProvinceIdUpdate').val("");
+              $('#StateNameUpdate').val("");
+              $("#CountryIdUpdate").val("").trigger("change");
+
+               //--now set new values
+              $('#StateProvinceIdUpdate').val(StateProvinceId);
+              $('#StateNameUpdate').val(StateName);
+              $("#CountryIdUpdate").select2("val", CountryId);
+
+            if(IsActive!=undefined && IsActive=='True'){
+                  $('#IsActiveUpdate').val('true');
+            }else{
+                  $('#IsActiveUpdate').val('false');
+            }
+
+              $('#EditDataModal').modal('show');
+
+     }
+
+</script>
+
+
+
+}

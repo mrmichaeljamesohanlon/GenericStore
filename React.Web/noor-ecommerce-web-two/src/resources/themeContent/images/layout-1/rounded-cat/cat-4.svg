@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E03131"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </radialGradient>
+    <linearGradient id="caliper4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8A80"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg4)"/>
+  <!-- Brake disc -->
+  <circle cx="100" cy="100" r="52" fill="none" stroke="#FF8A80" stroke-width="3" stroke-dasharray="12 6"/>
+  <circle cx="100" cy="100" r="36" fill="none" stroke="#FF8A80" stroke-width="2" stroke-dasharray="8 4"/>
+  <circle cx="100" cy="100" r="18" fill="#E03131" stroke="#FF8A80" stroke-width="3"/>
+  <!-- Caliper body -->
+  <rect x="128" y="70" width="32" height="60" rx="8" fill="url(#caliper4)" stroke="#FF8A80" stroke-width="2"/>
+  <!-- Caliper pistons -->
+  <rect x="132" y="80" width="12" height="18" rx="4" fill="#FF8A80"/>
+  <rect x="132" y="103" width="12" height="18" rx="4" fill="#FF8A80"/>
+  <!-- Bleed nipple -->
+  <circle cx="152" cy="90" r="4" fill="#FFD700"/>
+</svg>

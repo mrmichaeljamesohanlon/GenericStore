@@ -1,0 +1,69 @@
+﻿@model Entities.MainModels.TasksManagementModel
+
+<div class="row">
+    <div class="col-lg-3 col-md-3">
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">
+                <span id="lbl_modal_status_type">  Status:</span>
+            </label>
+            <div class="col-lg-9">
+                <select class="form-control" id="RequestStatusIdModal" name="RequestStatusIdModal"
+                        data_label_text="Rquest Type"
+                        @( (Model?.requestsQueueEntity?.RequestStatusId == (int)RequestStatusEnum.Approved
+                        || Model?.requestsQueueEntity?.RequestStatusId == (int)RequestStatusEnum.Declined) ? "disabled" : "")>
+                    <option value="">Select Status</option>
+
+
+
+                    @if (Model != null && Model.requestStatusesList != null && Model.requestStatusesList.Count() > 0)
+                    {
+                        foreach (var item in Model.requestStatusesList)
+                        {
+                            if (item.RequestStatusId == Model?.requestsQueueEntity?.RequestStatusId)
+                            {
+                                <option value="@item.RequestStatusId" selected>@item.StatusKey</option>
+                            }
+                            else
+                            {
+                                <option value="@item.RequestStatusId">@item.StatusKey</option>
+                            }
+
+                        }
+                    }
+
+
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3">
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">
+                <span id="lbl_modal_task_id">  Task ID:</span>
+            </label>
+            <div class="col-lg-9">
+                <input id="RequestTaskIdModal" class="form-control" name="RequestTaskIdModal" value="@(Model?.requestsQueueEntity?.TaskId)" disabled />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <div class="d-flex justify-content-end align-items-center">
+            @{
+                if((Model?.requestsQueueEntity?.RequestStatusId == (int)RequestStatusEnum.Approved
+                        || Model?.requestsQueueEntity?.RequestStatusId == (int)RequestStatusEnum.Declined))
+                {
+                    <button type="button" class="btn bg-purple-300 ml-3" id="lbl_add_attribute_btn" disabled>Submit</button>
+                }
+                else
+                {
+                    <button type="button" onclick="SubmitTaskManagementRequest('@Model?.requestsQueueEntity?.TaskId');" class="btn bg-purple-300 ml-3" id="lbl_add_attribute_btn">Submit</button>
+                }
+            }
+           
+        </div>
+    </div>
+
+</div>

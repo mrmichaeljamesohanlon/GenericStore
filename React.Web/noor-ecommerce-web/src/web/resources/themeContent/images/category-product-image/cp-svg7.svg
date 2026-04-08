@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6A1B9A"/>
+      <stop offset="100%" stop-color="#1A0033"/>
+    </linearGradient>
+    <linearGradient id="flag" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="12" fill="url(#bg7)"/>
+  <!-- Flag pole -->
+  <rect x="78" y="15" width="8" height="170" rx="4" fill="#CE93D8"/>
+  <!-- Flag body -->
+  <rect x="86" y="15" width="134" height="100" rx="5" fill="url(#flag)"/>
+  <!-- Checkered pattern (4x4 grid) -->
+  <rect x="86" y="15" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="154" y="15" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="120" y="40" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="188" y="40" width="32" height="25" fill="white" opacity="0.85"/>
+  <rect x="86" y="65" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="154" y="65" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="120" y="90" width="34" height="25" fill="white" opacity="0.85"/>
+  <rect x="188" y="90" width="32" height="25" fill="white" opacity="0.85"/>
+  <!-- Decorative stars -->
+  <circle cx="45" cy="60" r="6" fill="#FFD700"/>
+  <circle cx="268" cy="145" r="5" fill="#FFD700"/>
+  <circle cx="58" cy="160" r="4" fill="#E040FB"/>
+</svg>

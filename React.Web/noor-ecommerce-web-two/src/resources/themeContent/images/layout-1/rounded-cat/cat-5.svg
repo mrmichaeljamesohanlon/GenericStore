@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg5" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0A1A3D"/>
+    </radialGradient>
+    <linearGradient id="gauge5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40C4FF"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg5)"/>
+  <!-- Speedometer bezel -->
+  <circle cx="100" cy="110" r="62" fill="none" stroke="#40C4FF" stroke-width="5"/>
+  <!-- Dial face -->
+  <path d="M45,110 A55,55 0 1,1 155,110" fill="none" stroke="#1565C0" stroke-width="22"/>
+  <!-- Speed arc (colored) -->
+  <path d="M45,110 A55,55 0 0,1 100,55" fill="none" stroke="#FFD700" stroke-width="9" stroke-linecap="round"/>
+  <path d="M100,55 A55,55 0 0,1 155,110" fill="none" stroke="#FF4444" stroke-width="9" stroke-linecap="round"/>
+  <!-- Tick marks -->
+  <line x1="100" y1="58" x2="100" y2="68" stroke="white" stroke-width="3"/>
+  <line x1="62" y1="72" x2="68" y2="80" stroke="white" stroke-width="3"/>
+  <line x1="49" y1="110" x2="59" y2="110" stroke="white" stroke-width="3"/>
+  <line x1="138" y1="72" x2="132" y2="80" stroke="white" stroke-width="3"/>
+  <line x1="151" y1="110" x2="141" y2="110" stroke="white" stroke-width="3"/>
+  <!-- Needle -->
+  <line x1="100" y1="110" x2="68" y2="70" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+  <!-- Center cap -->
+  <circle cx="100" cy="110" r="9" fill="#40C4FF"/>
+  <circle cx="100" cy="110" r="4" fill="#0A1A3D"/>
+</svg>

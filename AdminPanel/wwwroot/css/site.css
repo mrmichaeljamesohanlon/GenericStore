@@ -1,0 +1,169 @@
+
+
+
+
+.site-search-btn {
+    background-color: #5371ca;
+    color: white;
+}
+
+    .site-search-btn:hover {
+        color: white;
+    }
+
+.site-table-listing {
+    border-collapse: collapse;
+    margin: 4px 0;
+    font-size: 13px;
+    min-width: 400px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+}
+
+    .site-table-listing thead tr {
+        background-color: #26a69a;
+        color: #ffffff;
+        text-align: left;
+    }
+
+        .site-table-listing thead tr th {
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+        }
+
+    .site-table-listing th,
+    .site-table-listing td {
+        padding: 12px 15px;
+    }
+
+    .site-table-listing tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .site-table-listing tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .site-table-listing tbody tr:last-of-type {
+            border-bottom: 3px solid #26a69a;
+        }
+
+.site-bg-modal-header {
+    background-color: #26a69a !important;
+}
+
+.site-card-title-border {
+    border: 2px solid #a2a247 !important;
+    border-radius: 5px !important;
+    padding: 4px 10px !important;
+}
+
+
+.site-page-title {
+    background: url(/themeContent/global_assets/images/login_cover.jpg);
+    background-size: cover;
+    padding: 8px 13px 8px 13px;
+    color: white;
+    border-radius: 6px;
+}
+
+    .site-page-title h5 span {
+        color: #e8f702;
+    }
+
+.error {
+    color: red;
+}
+
+
+.form-tooltip-color {
+    color: #2196f3 !important;
+}
+
+.border-top-blue-custom {
+    border-top-color: #2196f3 !important;
+    border-top: 2px solid;
+    border-radius: 5px;
+}
+
+.order-note-reply {
+    margin-left: 83px;
+    background-color: #7770982b;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.total-orders-dashboard {
+    border: 1px solid #009688;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.total-products-dashboard {
+    border: 1px solid #5c6bc0;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.total-users-dashboard {
+    border: 1px solid #ff7043;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.total-income-dashboard {
+    border: 1px solid #42a5f5;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+
+.home-chart-size {
+    width: 100%;
+    height: 400px;
+}
+
+.site-main-loader-div {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    position: fixed;
+    inset: 0px;
+    z-index: 20000;
+    background-color: white;
+    opacity: 0.6;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-main-load-visual-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+
+.search-users-banks-list {
+    padding: 4px;
+    list-style: none;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+}
+
+.search-users-banks-list li {
+    border-bottom: 1px solid #dddddd;
+    padding: 3px;
+}
+
+.search-users-banks-list li:hover {
+    background-color: #ebe4e48c;
+}
+
+.search-users-banks-list a {
+    color: #727272;
+}
