@@ -222,7 +222,7 @@ const ProductBox = ({ item, hoverEffect, layout, ProductDetailPageForceUpload })
 
                             {layout === "list-view" ? (
                                 <p>
-                                    {makeProductShortDescription(item.ShortDescription, 45)}
+                                    {makeProductShortDescription(item.ShortDescription, 200)}
                                 </p>
                             ) : (
                                 ""
