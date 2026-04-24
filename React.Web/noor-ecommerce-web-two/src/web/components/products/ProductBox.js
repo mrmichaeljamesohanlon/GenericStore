@@ -228,7 +228,7 @@ const ProductBox = ({ item, hoverEffect, layout, ProductDetailPageForceUpload })
                                 ""
                             )}
                             <Link to={buildProductDetailUrl(item, item.CategoryName, item.ProductName, getLanguageCodeFromSession())}>
-                                <h6 className="price-title">{makeProductShortDescription(item.ProductName, 50)}</h6>
+                                <h6 className="price-title">{item.ProductName}</h6>
                             </Link>
 
                         </div>
