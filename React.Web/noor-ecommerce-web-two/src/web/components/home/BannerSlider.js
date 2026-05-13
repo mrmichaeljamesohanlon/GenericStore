@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
+import promoBanner from "../../../resources/themeContent/images/layout-2/collection-banner/2.jpg";
 
 const makeLocalBannerCandidates = () => {
   const extensions = ["jpg", "jpeg", "png", "webp"];
@@ -33,7 +34,7 @@ const makeLocalBannerCandidates = () => {
 };
 
 const localBannerCandidates = makeLocalBannerCandidates();
-const fallbackBanner = [{ src: "/images/home/banner-1.jpg", alt: "Home Banner" }];
+const bundledPromoBanner = [{ src: promoBanner, alt: "Store highlights" }];
 
 const sliderSettings = {
   dots: true,
@@ -117,7 +118,7 @@ const BannerSlider = () => {
         return;
       }
 
-      setBannerImages([]);
+      setBannerImages(bundledPromoBanner);
     };
 
     loadBannerImages();
@@ -132,7 +133,7 @@ const BannerSlider = () => {
   }, [bannerImages]);
 
   const imagesToDisplay = useMemo(
-    () => (bannerImages.length > 0 ? bannerImages : fallbackBanner),
+    () => (bannerImages.length > 0 ? bannerImages : bundledPromoBanner),
     [bannerImages]
   );
 

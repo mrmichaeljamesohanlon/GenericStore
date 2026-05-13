@@ -11,6 +11,7 @@ import Config from "../../../../helpers/Config";
 import GlobalEnums from "../../../../helpers/GlobalEnums";
 import { makeAnyStringLengthShort, makeProductShortDescription, replaceWhiteSpacesWithDashSymbolInUrl } from "../../../../helpers/ConversionHelper";
 import logoDataUri from '../../../../helpers/logoDataUri';
+import useMobileSize from '../../../../helpers/utils/isMobile';
 
 const SearchHeader = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const SearchHeader = () => {
     const [SearchTerm, setSearchTerm] = useState("");
     const leftMenuState = useSelector(state => state.commonReducer.isLeftMenuSet);
     const [leftMenu, setLeftMenu] = useState(leftMenuState);
+
+    useEffect(() => {
+        setLeftMenu(leftMenuState);
+    }, [leftMenuState]);
     const [langCode, setLangCode] = useState('');
     const [LocalizationLabelsArray, setLocalizationLabelsArray] = useState([]);
     const totalCartItems = useSelector(state => state.cartReducer.totalCartItems);
@@ -31,6 +36,7 @@ const SearchHeader = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropDown = () => setDropdownOpen(!dropdownOpen);
     const { t } = useTranslation();
+    const mobileSize = useMobileSize();
 
     const setLeftMenuManual = (value) => {
 
@@ -161,16 +167,30 @@ const SearchHeader = () => {
                 <Row>
                     <Col md="12">
                         <div className="main-menu-block">
+                            {!mobileSize && (
                             <div
                                 onClick={() => {
                                     setLeftMenuManual(!leftMenu);
-                                    document.body.style.overflow = "hidden";
+                                    document.body.style.overflow = leftMenu ? "visible" : "hidden";
                                 }}
-                                className="sm-nav-block">
+                                className="sm-nav-block"
+                                role="button"
+                                tabIndex={0}
+                                aria-label="Open categories"
+                                aria-expanded={leftMenu}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setLeftMenuManual(!leftMenu);
+                                        document.body.style.overflow = leftMenu ? "visible" : "hidden";
+                                    }
+                                }}
+                            >
                                 <span className="sm-nav-btn">
-                                    <i className="fa fa-bars"></i>
+                                    <i className="fa fa-bars" aria-hidden="true"></i>
                                 </span>
                             </div>
+                            )}
                             <div className="logo-block">
                                 <a href="/#">
                                     <img src={logoDataUri} className="img-fluid" alt="logo" />

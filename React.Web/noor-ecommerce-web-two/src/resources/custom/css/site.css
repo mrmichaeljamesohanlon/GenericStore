@@ -22,7 +22,7 @@
 .spark-banner-img {
     width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
     display: block;
 }
@@ -355,168 +355,229 @@
   }
 
 /* ======================================================
-   Meteor Hero Section
+   Home hero — product-led, photo + contrast (replaces meteor/star streaks)
    ====================================================== */
 
-/* Container */
-.meteor-hero-section {
+.dt-home-hero {
   position: relative;
   width: 100%;
-  min-height: 520px;
-  background: radial-gradient(ellipse at 80% 20%, #1a1a3e 0%, #0d0d22 55%, #000010 100%);
+  min-height: 420px;
+  margin-top: 12px;
   overflow: hidden;
+  background: #0a0a0a;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  margin-top: 15px;
 }
 
-/* Subtle dark overlay for depth */
-.meteor-hero-overlay {
+.dt-home-hero__media {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
-  pointer-events: none;
+  background-image: var(--dt-home-hero-img);
+  background-size: cover;
+  background-position: center 35%;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.dt-home-hero__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.25) 100%);
   z-index: 1;
 }
 
-/* ---- Meteor streaks ---- */
-@keyframes meteorFall {
-  0% {
-    transform: rotate(215deg) translateX(0);
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(215deg) translateX(-600px);
-    opacity: 0;
-  }
-}
-
-.meteor-streak {
-  position: absolute;
-  display: block;
-  width: 2px;
-  height: 120px;
-  border-radius: 9999px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, transparent 100%);
-  box-shadow: 0 0 8px 1px rgba(255,255,255,0.35), 0 0 20px 3px rgba(180,180,255,0.2);
-  animation: meteorFall linear infinite;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* ---- Text content ---- */
-.meteor-hero-content {
+.dt-home-hero__inner {
   position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: 60px 24px;
-  max-width: 780px;
+  z-index: 2;
+  max-width: 1120px;
+  width: 100%;
+  padding: 56px 28px 52px;
+  text-align: left;
 }
 
-.meteor-hero-eyebrow {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #FFD600;
-  margin-bottom: 18px;
-}
-
-/* Main heading */
-.meteor-hero-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 22px;
-  line-height: 1.15;
-}
-
-.meteor-hero-title-line {
-  font-size: clamp(2.4rem, 6vw, 4rem);
+.dt-home-hero__title {
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-  /* subtle text-glow */
-  text-shadow:
-    0 0 18px rgba(255,214,0,0.25),
-    0 0 40px rgba(255,214,0,0.1);
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1.12;
+  margin: 0 0 16px;
+  max-width: 18ch;
 }
 
-/* Animated shimmer on the highlighted word */
-@keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position: 400px 0; }
-}
-
-.meteor-hero-title-highlight {
-  background: linear-gradient(
-    90deg,
-    #FFD600 0%,
-    #fff8c0 35%,
-    #FFD600 50%,
-    #fff8c0 65%,
-    #FFD600 100%
-  );
-  background-size: 400px 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3.5s linear infinite;
-  text-shadow: none;
-}
-
-.meteor-hero-subtitle {
+.dt-home-hero__subtitle {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.72);
-  margin-bottom: 38px;
-  line-height: 1.6;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 42ch;
+  margin: 0 0 28px;
 }
 
-/* CTA button */
-.meteor-hero-btn {
+.dt-home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dt-home-hero__btn {
   display: inline-block;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 0;
+  text-decoration: none !important;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.dt-home-hero__btn--primary {
+  background: #ffd600;
+  color: #000 !important;
+  border: 2px solid #ffd600;
+}
+
+.dt-home-hero__btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #000 !important;
+}
+
+.dt-home-hero__btn--ghost {
+  background: transparent;
+  color: #fff !important;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.dt-home-hero__btn--ghost:hover {
+  border-color: #ffd600;
+  color: #ffd600 !important;
+}
+
+@media (max-width: 767px) {
+  .dt-home-hero {
+    min-height: 360px;
+  }
+  .dt-home-hero__inner {
+    padding: 36px 18px 40px;
+  }
+}
+
+/* Mobile text nav strip (no second hamburger) */
+.mobile-primary-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px 10px;
+  margin: 0 0 0 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 16px 46px;
-  background-color: #FFD600;
-  color: #000 !important;
-  border-radius: 0;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-  text-decoration: none;
-  box-shadow: 0 0 24px rgba(255,214,0,0.3);
 }
 
-.meteor-hero-btn:hover {
-  background-color: #ffffff;
-  color: #000 !important;
-  box-shadow: 0 0 36px rgba(255,255,255,0.25);
-  text-decoration: none;
+.mobile-primary-nav__link {
+  color: #111 !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  padding: 4px 2px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 767px) {
-  .meteor-hero-section {
-    min-height: 380px;
-  }
-  .meteor-hero-content {
-    padding: 40px 16px;
-  }
-  .meteor-hero-title-line {
-    font-size: 2rem;
-  }
-  .meteor-hero-subtitle {
-    font-size: 0.9rem;
-  }
+.mobile-primary-nav__link--active {
+  color: #000 !important;
+  box-shadow: 0 2px 0 #ffd600;
+}
+
+.mobile-primary-nav__sep {
+  color: #bbb;
+  user-select: none;
+}
+
+/* Homepage product-led regions */
+.home-page-dt .home-section-head {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 16px 8px;
+}
+
+.home-page-dt .home-section-head--tight {
+  padding-top: 28px;
+  padding-bottom: 4px;
+}
+
+.home-section-head__title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  color: #0a0a0a;
+}
+
+.home-section-head__sub {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 52ch;
+}
+
+.home-product-region {
+  padding-bottom: 28px;
+}
+
+.home-product-region--alt {
+  background: #fff;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.home-feature-categories {
+  margin-top: 8px;
+}
+
+/* Workshop (non-commerce) page */
+.workshop-hero {
+  background: linear-gradient(135deg, #111 0%, #2a2a2a 100%);
+  color: #fff;
+}
+
+.workshop-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffd600;
+  margin-bottom: 10px;
+}
+
+.workshop-hero-title {
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.workshop-hero-lead {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  max-width: 52ch;
+}
+
+.workshop-hero-note {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  max-width: 52ch;
+}
+
+.workshop-list {
+  padding-left: 1.1rem;
+  line-height: 1.7;
+  color: #333;
 }
   
 /* Card details modal - store logo */

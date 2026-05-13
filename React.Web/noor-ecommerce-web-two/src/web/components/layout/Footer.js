@@ -254,6 +254,11 @@ const Footer = ({ layoutLogo }) => {
                                         }
                                       </Link>
                                     </li>
+                                    <li>
+                                      <Link to={`/${getLanguageCodeFromSession()}/workshop`}>
+                                        Workshop (services)
+                                      </Link>
+                                    </li>
                                   </ul>
                                 </div>
                               </div>

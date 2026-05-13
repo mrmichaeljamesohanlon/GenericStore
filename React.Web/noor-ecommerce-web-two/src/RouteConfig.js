@@ -24,6 +24,7 @@ import GoTop from "./web/components/layout/GoTop";
 import CompareList from "./web/views/compare/Index";
 import Campaign from "./web/views/campaign/Campaign";
 import TermsAndConditions from "./web/views/terms/TermsAndConditions";
+import Workshop from "./web/views/workshop/Workshop";
 
 
 
@@ -55,6 +56,7 @@ export default function RouteConfig() {
                 <Route path="/refresh" element={<Refresh/>} />
                 <Route path="/become-seller" element={<BecomeVendor />} />
                 <Route path="/compare" element={<CompareList />} />
+                <Route path="/workshop" element={<Workshop />} />
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                 <Route path=":langCode/terms-and-conditions" element={<TermsAndConditions />} />
                 {/* Routes without language code ends here */}
@@ -77,6 +79,7 @@ export default function RouteConfig() {
                 <Route path="/:langCode/refresh" element={<Refresh />} />
                 <Route path="/:langCode/become-seller" element={<BecomeVendor />} />
                 <Route path="/:langCode/compare" element={<CompareList />} />
+                <Route path="/:langCode/workshop" element={<Workshop />} />
                 {/* Routes with language code ends here */}
 
                 

@@ -1,14 +1,13 @@
-import React, { Fragment, useContext, useEffect, Component, useState } from "react";
-import { Container, Row, Col } from "reactstrap";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
 import Config from "../../../../helpers/Config";
 import { MakeApiCallAsync } from "../../../../helpers/ApiHelpers";
 import { getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from "../../../../helpers/CommonHelper";
 import GlobalEnums from "../../../../helpers/GlobalEnums";
-import { makeAnyStringLengthShort, makeProductShortDescription, replaceWhiteSpacesWithDashSymbolInUrl } from "../../../../helpers/ConversionHelper";
+import { makeAnyStringLengthShort, replaceWhiteSpacesWithDashSymbolInUrl } from "../../../../helpers/ConversionHelper";
 import rootAction from "../../../../stateManagment/actions/rootAction";
+import useMobileSize from "../../../../helpers/utils/isMobile";
 
 
 const MenuCategory = () => {
@@ -22,7 +21,8 @@ const MenuCategory = () => {
         setExpandedCategories(prev => ({ ...prev, [categoryId]: !prev[categoryId] }));
     };
 
-    const { t } = useTranslation();
+
+    const mobileSize = useMobileSize();
 
     let leftMenuState = useSelector(state => state.commonReducer.isLeftMenuSet);
 
@@ -37,6 +37,10 @@ const MenuCategory = () => {
     const [LocalizationLabelsArray, setLocalizationLabelsArray] = useState([]);
 
     const forceLoadCategory = (url) => {
+        if (mobileSize) {
+            setLeftMenuManual(false);
+            document.body.style.overflow = "visible";
+        }
         window.location.href = url;
     }
 
@@ -105,29 +109,58 @@ const MenuCategory = () => {
             .filter(x => x.ParentCategoryID === parentId)
             .sort(sortByName);
 
+    const desktopCategoryTitle =
+        LocalizationLabelsArray.length > 0
+            ? replaceLoclizationLabel(LocalizationLabelsArray, " shop By Category", "lbl_shopby_category")
+            : "shop By Category";
+
+    const openMobileCategoryDrawer = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setLeftMenuManual(!leftMenuState);
+        document.body.style.overflow = leftMenuState ? "visible" : "hidden";
+    };
+
+    const openDesktopCategoryDropdown = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setShowState(!showState);
+    };
 
     return (
         <>
-            <div className="nav-block" onClick={() => setShowState(!showState)}>
+            <div className="nav-block">
                 <div className="nav-left">
-                    <nav className="navbar" data-toggle="collapse" data-target="#navbarToggleExternalContent">
-                        <button className="navbar-toggler" type="button" onClick={() => setShowState(!showState)}>
-                            <span className="navbar-icon">
-                                <i className="fa fa-arrow-down"></i>
-                            </span>
-                        </button>
-                        <h5 className="mb-0  text-white title-font">
-                            {LocalizationLabelsArray.length > 0 ?
-                                replaceLoclizationLabel(LocalizationLabelsArray, " shop By Category", "lbl_shopby_category")
-                                :
-                                "shop By Category"
+                    <nav
+                        className="navbar"
+                        data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent"
+                        onClick={mobileSize ? openMobileCategoryDrawer : openDesktopCategoryDropdown}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                mobileSize ? openMobileCategoryDrawer(e) : openDesktopCategoryDropdown(e);
                             }
+                        }}
+                        aria-expanded={mobileSize ? leftMenuState : showState}
+                        aria-label={mobileSize ? "Categories" : desktopCategoryTitle}
+                    >
+                        <div className="navbar-toggler" aria-hidden="true">
+                            <span className="navbar-icon">
+                                <i className={`fa ${mobileSize ? "fa-bars" : "fa-arrow-down"}`} />
+                            </span>
+                        </div>
+                        <h5 className="mb-0 text-white title-font">
+                            {mobileSize ? "Categories" : desktopCategoryTitle}
                         </h5>
                     </nav>
                     <div className={`collapse  nav-desk ${showState ? "show" : ""}`} id="navbarToggleExternalContent">
                         <a
                             href="#"
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.preventDefault();
                                 setLeftMenuManual(!leftMenuState);
                                 document.body.style.overflow = "visible";
                             }}
@@ -139,7 +172,7 @@ const MenuCategory = () => {
                                     setLeftMenuManual(false);
                                     document.body.style.overflow = "visible";
                                 }}>
-                                <a>
+                                <a href="#">
                                     <i className="fa fa-angle-left"></i>Back
                                 </a>
                             </li>

@@ -138,16 +138,18 @@ const PopularCategories = () => {
         PopularCategoriesList != undefined && PopularCategoriesList != null && PopularCategoriesList.length > 0
           ?
           <>
-            <div className="title6 ">
-              <h4>   {LocalizationLabelsArray.length > 0 ?
-                replaceLoclizationLabel(LocalizationLabelsArray, " Popular Categories!", "lbl_popct_category")
-                :
-                " Popular Categories!"
-              }
-              </h4>
+            <div className="home-section-head home-section-head--tight container-fluid px-lg-4">
+              <h2 className="home-section-head__title">
+                {LocalizationLabelsArray.length > 0
+                  ? replaceLoclizationLabel(LocalizationLabelsArray, "Shop by category", "lbl_popct_category")
+                  : "Shop by category"}
+              </h2>
+              <p className="home-section-head__sub">
+                Jump straight into the product catalogue — every tile opens the shop, not workshop services.
+              </p>
             </div>
 
-            <section className="rounded-category rounded-category-inverse">
+            <section className="rounded-category rounded-category-inverse home-feature-categories">
               <Container>
                 <Row>
                   <Col>

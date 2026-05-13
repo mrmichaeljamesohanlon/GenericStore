@@ -1,5 +1,4 @@
-import React, { Fragment, useContext, useEffect, Component, useState } from "react";
-import { Container, Row, Col, Media } from "reactstrap";
+import React, { useState } from "react";
 import MenuBar from "./MenuBar";
 
 
@@ -7,6 +6,7 @@ import MenuBar from "./MenuBar";
 
 const HorizaontalMenu = () => {
     const [menuResponsive, setMenuResponsive] = useState(false);
+
     return (
       <>
         <div

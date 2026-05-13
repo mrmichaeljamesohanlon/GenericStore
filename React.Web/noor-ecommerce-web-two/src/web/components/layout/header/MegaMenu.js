@@ -1,36 +1,30 @@
-import React, { Fragment, useContext, useEffect, Component, useState } from "react";
-import { Container, Row, Col, Media } from "reactstrap";
+import React from "react";
+import { Container, Row, Col } from "reactstrap";
 import MenuCategory from "./MenuCategory";
 import HorizaontalMenu from "./HorizaontalMenu";
+import MobilePrimaryNav from "./MobilePrimaryNav";
 import MobileSearch from "./MobileSearch";
 import MenuContactUs from "./MenuContactUs";
 import MenuGift from "./MenuGift";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom';
 import Wishlist from "./Wishlist";
-
-
+import useMobileSize from "../../../../helpers/utils/isMobile";
 
 const MegaMenu = () => {
-
-    
+    const mobileSize = useMobileSize();
 
     return (
         <>
-
             <div className="custom-container">
                 <Row>
                     <Col>
                         <div className="navbar-menu">
                             <div className="category-left">
                                 <MenuCategory />
-                                <HorizaontalMenu />
+                                {mobileSize ? <MobilePrimaryNav /> : <HorizaontalMenu />}
                                 <div className="icon-block">
                                     <ul>
                                         <Wishlist />
-
                                         <MobileSearch />
-                                        {/* <MobileSetting /> */}
                                     </ul>
                                 </div>
                             </div>
@@ -44,8 +38,6 @@ const MegaMenu = () => {
             </div>
         </>
     );
-
-}
-
+};
 
 export default MegaMenu;

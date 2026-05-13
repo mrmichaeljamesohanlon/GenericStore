@@ -12,7 +12,7 @@ const giftData = [
   {
     img1: icon1,
     img2: iconFire,
-    title: "Workshop Special",
+    title: "Pitlane offer",
     desc: "Free inspection with any service",
   },
   {

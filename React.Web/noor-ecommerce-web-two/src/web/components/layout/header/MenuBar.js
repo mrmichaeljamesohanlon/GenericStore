@@ -141,9 +141,9 @@ const MenuBar = (props) => {
 
                 <NavLink to={`/${getLanguageCodeFromSession()}/all-products/0/all-categories`} className={navLinkClass} id="lbl_mgmenu_products">
                     {LocalizationLabelsArray.length > 0 ?
-                        replaceLoclizationLabel(LocalizationLabelsArray, "All Products", "lbl_mgmenu_products")
+                        replaceLoclizationLabel(LocalizationLabelsArray, "Shop", "lbl_mgmenu_products")
                         :
-                        "All Products"
+                        "Shop"
                     }
                 </NavLink>
             </li>
@@ -168,6 +168,11 @@ const MenuBar = (props) => {
                         "FAQ's"
                     }
 
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to={`/${getLanguageCodeFromSession()}/workshop`} className={navLinkClass} id="lbl_thead_workshop">
+                    Workshop
                 </NavLink>
             </li>
             <li>
