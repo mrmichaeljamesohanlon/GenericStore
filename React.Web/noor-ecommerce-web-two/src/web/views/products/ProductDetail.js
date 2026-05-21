@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import Config from "../../../helpers/Config";
 import { showErrorMsg, showInfoMsg, showSuccessMsg, validateAnyFormField } from "../../../helpers/ValidationHelper";
 import GlobalEnums from "../../../helpers/GlobalEnums";
-import { GetDefaultCurrencySymbol, getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from "../../../helpers/CommonHelper";
+import { GetDefaultCurrencySymbol, getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray, replaceLoclizationLabel } from "../../../helpers/CommonHelper";
 import { MakeApiCallAsync } from "../../../helpers/ApiHelpers";
 import rootAction from "../../../stateManagment/actions/rootAction";
 import { LOADER_DURATION } from "../../../helpers/Constants";
@@ -404,8 +404,7 @@ const ProductDetail = () => {
             //--Get payment methods
             const responsePaymentMethods = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_PAYMENT_METHODS'], null, param, headers, "POST", true);
             if (responsePaymentMethods != null && responsePaymentMethods.data != null) {
-                await setPaymentMethods(JSON.parse(responsePaymentMethods.data.data));
-
+                setPaymentMethods(parseApiDataAsArray(responsePaymentMethods.data.data));
             }
 
 

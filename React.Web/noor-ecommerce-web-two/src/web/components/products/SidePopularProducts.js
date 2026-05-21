@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import rootAction from '../../../stateManagment/actions/rootAction';
 import { LOADER_DURATION } from '../../../helpers/Constants';
 import { buildProductDetailUrl, makeAnyStringLengthShort, makeImageUrl, makeProductShortDescription } from '../../../helpers/ConversionHelper';
-import { GetDefaultCurrencySymbol, getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
+import { GetDefaultCurrencySymbol, getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
 import GlobalEnums from '../../../helpers/GlobalEnums';
 import { Media } from "reactstrap";
 
@@ -40,8 +40,7 @@ const SidePopularProducts = () => {
 
         const responsePopularProducts = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_POPULAR_PRODUCTS_LIST'], null, paramPouplarProducts, headersPouplarProducts, "POST", true);
         if (responsePopularProducts != null && responsePopularProducts.data != null) {
-            await setPopularProductsList(JSON.parse(responsePopularProducts.data.data));
-            console.log(JSON.parse(responsePopularProducts.data.data));
+            setPopularProductsList(parseApiDataAsArray(responsePopularProducts.data.data));
         }
     }
 

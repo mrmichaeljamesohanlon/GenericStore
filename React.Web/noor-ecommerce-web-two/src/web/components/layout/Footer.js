@@ -9,7 +9,7 @@ import { MakeApiCallAsync } from '../../../helpers/ApiHelpers';
 import { checkIfStringIsEmtpy } from '../../../helpers/ValidationHelper';
 import rootAction from '../../../stateManagment/actions/rootAction';
 import { LOADER_DURATION } from '../../../helpers/Constants';
-import { getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
+import { getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
 import GlobalEnums from '../../../helpers/GlobalEnums';
 import { makeImageUrl } from '../../../helpers/ConversionHelper';
 
@@ -44,8 +44,7 @@ const Footer = ({ layoutLogo }) => {
       //--Get payment methods
       const responsePaymentMethods = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_PAYMENT_METHODS'], null, param, headers, "POST", true);
       if (responsePaymentMethods != null && responsePaymentMethods.data != null) {
-        await setPaymentMethods(JSON.parse(responsePaymentMethods.data.data));
-
+        setPaymentMethods(parseApiDataAsArray(responsePaymentMethods.data.data));
       }
 
       //--Get Website Logo

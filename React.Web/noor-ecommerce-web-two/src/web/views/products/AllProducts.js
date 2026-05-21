@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { MakeApiCallAsync } from "../../../helpers/ApiHelpers";
 import GlobalEnums from "../../../helpers/GlobalEnums";
-import { GetLocalizationControlsJsonDataForScreen, ScrollIntoSpecificDiv } from "../../../helpers/CommonHelper";
+import { GetLocalizationControlsJsonDataForScreen, ScrollIntoSpecificDiv, parseApiDataAsArray, getTotalRecordsFromListPayload } from "../../../helpers/CommonHelper";
 import rootAction from "../../../stateManagment/actions/rootAction";
 import { LOADER_DURATION } from "../../../helpers/Constants";
 import ProductBox from "../../components/products/ProductBox";
@@ -209,16 +209,13 @@ const AllProducts = () => {
 
             let responseAllProducts = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_All_PRODUCTS'], null, paramFromPage, headersFromPage, "POST", true);
             if (responseAllProducts != null && responseAllProducts.data != null) {
-
-                await setProductsList(JSON.parse(responseAllProducts.data.data));
-                let AllProducts = JSON.parse(responseAllProducts.data.data);
-                await setTotalRecords(parseInt(AllProducts[0]?.TotalRecords ?? 0))
-                console.log(JSON.parse(responseAllProducts.data.data));
-
-                if (AllProducts.length > 0) {
-                    await setshowPagination(true);
+                const raw = responseAllProducts.data.data;
+                const list = parseApiDataAsArray(raw);
+                setProductsList(list);
+                setTotalRecords(getTotalRecordsFromListPayload(raw, list));
+                if (list.length > 0) {
+                    setshowPagination(true);
                 }
-
             }
 
 
@@ -286,16 +283,13 @@ const AllProducts = () => {
 
             const response = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_All_PRODUCTS'], null, param, headers, "POST", true);
             if (response != null && response.data != null) {
-
-                await setProductsList(JSON.parse(response.data.data));
-                let AllProducts = JSON.parse(response.data.data);
-                await setTotalRecords(parseInt(AllProducts[0]?.TotalRecords ?? 0))
-                console.log(JSON.parse(response.data.data));
-
-                if (AllProducts.length > 0) {
-                    await setshowPagination(true);
+                const raw = response.data.data;
+                const list = parseApiDataAsArray(raw);
+                setProductsList(list);
+                setTotalRecords(getTotalRecordsFromListPayload(raw, list));
+                if (list.length > 0) {
+                    setshowPagination(true);
                 }
-
             }
 
 

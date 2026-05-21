@@ -8,7 +8,7 @@ import rootAction from '../../../stateManagment/actions/rootAction';
 import { LOADER_DURATION } from '../../../helpers/Constants';
 import { Link } from 'react-router-dom';
 import GlobalEnums from '../../../helpers/GlobalEnums';
-import { GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
+import { GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray, replaceLoclizationLabel } from '../../../helpers/CommonHelper';
 import Slider from "react-slick";
 import { Row, Col } from "reactstrap";
 
@@ -97,9 +97,9 @@ const RelatedProducts = (props) => {
             const response = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_RELATED_PRODUCTS_LIST'], null, param, headers, "POST", true);
             if (response != null && response.data != null) {
 
-                let ProductData = JSON.parse(response.data.data);
+                let ProductData = parseApiDataAsArray(response.data.data);
 
-                if (ProductData != undefined && ProductData.length > 0) {
+                if (ProductData.length > 0) {
 
                     let slidesToShow = 6;
                     for (let i = 0; i < slidesToShow; i++) {

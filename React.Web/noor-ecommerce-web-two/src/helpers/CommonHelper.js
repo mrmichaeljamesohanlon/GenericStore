@@ -219,4 +219,68 @@ export const ScrollIntoSpecificDiv = (divId, behaviorParam) => {
       }
 }
 
+export const parseApiDataAsArray = (raw) => {
+    if (raw == null || raw === '') return [];
+    let v = raw;
+    if (typeof raw === 'string') {
+        try {
+            v = JSON.parse(raw);
+        } catch {
+            return [];
+        }
+    }
+    if (Array.isArray(v)) return v;
+    if (v && typeof v === 'object') {
+        const candidates = [
+            v.data,
+            v.Data,
+            v.paymentMethods,
+            v.PaymentMethods,
+            v.products,
+            v.Products,
+            v.items,
+            v.Items,
+            v.records,
+            v.Records,
+            v.rows,
+            v.Rows,
+            v.result,
+            v.Result,
+            v.list,
+            v.List,
+            v.value,
+            v.Value,
+        ];
+        for (let i = 0; i < candidates.length; i++) {
+            if (Array.isArray(candidates[i])) return candidates[i];
+        }
+    }
+    return [];
+};
+
+export const getTotalRecordsFromListPayload = (raw, list) => {
+    if (list.length > 0) {
+        const t = list[0]?.TotalRecords ?? list[0]?.totalRecords;
+        if (t != null && t !== '') {
+            const n = parseInt(t, 10);
+            return Number.isNaN(n) ? 0 : n;
+        }
+    }
+    let v = raw;
+    if (typeof raw === 'string') {
+        try {
+            v = JSON.parse(raw);
+        } catch {
+            return 0;
+        }
+    }
+    if (v && typeof v === 'object' && !Array.isArray(v)) {
+        const t = v.TotalRecords ?? v.totalRecords ?? v.TotalCount ?? v.totalCount ?? v.RecordCount ?? v.recordCount;
+        if (t != null && t !== '') {
+            const n = parseInt(t, 10);
+            return Number.isNaN(n) ? 0 : n;
+        }
+    }
+    return 0;
+};
 

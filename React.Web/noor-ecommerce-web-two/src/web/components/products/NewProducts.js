@@ -5,7 +5,7 @@ import ProductBox from "./ProductBox";
 import Skeleton from "./Skeleton/Skeleton";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen } from "../../../helpers/CommonHelper";
+import { getLanguageCodeFromSession, GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray } from "../../../helpers/CommonHelper";
 import Config from "../../../helpers/Config";
 import { MakeApiCallAsync } from "../../../helpers/ApiHelpers";
 import GlobalEnums from "../../../helpers/GlobalEnums";
@@ -123,7 +123,7 @@ const NewProducts = ({ effect }) => {
         const response = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_RECENTS_PRODUCTS_LIST'], null, param, headers, "POST", true);
         if (response != null && response.data != null) {
 
-            let ProductData = JSON.parse(response.data.data);
+            let ProductData = parseApiDataAsArray(response.data.data);
             let slidesToShow = 6;
             if (ProductData != undefined && ProductData.length < slidesToShow) {
                 //--just concating productData with existing data if size is less slidesToShow 

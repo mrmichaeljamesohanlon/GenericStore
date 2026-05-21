@@ -6,7 +6,7 @@ import Skeleton from "../products/Skeleton/Skeleton";
 import Slider from "react-slick";
 import Config from "../../../helpers/Config";
 import { MakeApiCallAsync } from "../../../helpers/ApiHelpers";
-import { GetLocalizationControlsJsonDataForScreen, replaceLoclizationLabel } from "../../../helpers/CommonHelper";
+import { GetLocalizationControlsJsonDataForScreen, parseApiDataAsArray, replaceLoclizationLabel } from "../../../helpers/CommonHelper";
 import GlobalEnums from "../../../helpers/GlobalEnums";
 import rootAction from "../../../stateManagment/actions/rootAction";
 import { LOADER_DURATION } from "../../../helpers/Constants";
@@ -637,8 +637,7 @@ const PopularProducts = ({ hoverEffect }) => {
 
             const response = await MakeApiCallAsync(Config.END_POINT_NAMES['GET_POPULAR_PRODUCTS_LIST'], null, param, headers, "POST", true);
             if (response != null && response.data != null) {
-                await setProductsList(JSON.parse(response.data.data));
-                console.log(JSON.parse(response.data.data));
+                setProductsList(parseApiDataAsArray(response.data.data));
             }
 
 
